@@ -13,7 +13,25 @@ bin_num 占比不低于5%
 import numpy as np
 import pandas as pd
 
-def data_describe(data, var_name_bf, var_name_target, feature_type):
+def iv_filter(data,woeSummarys,threshold=0.02):
+    '''
+    删除woe数据表中，iv<=0.02的字段
+    :param data:
+    :param woeSummarys:
+    :param threshold:
+    :return:
+    '''
+    delCols = []
+    for col,woeSummary in zip(data.columns,woeSummarys):
+        ivSum = sum(woeSummary['iv'])
+        if ivSum <= 0.02:
+            delCols.append(col)
+            print("%s 不符合iv>0.02的条件!!!" % col)
+    data.drop(delCols,axis=1,inplace=True)
+    return data
+
+
+def data_describe(X,y,feature,feature_type):
     """
     统计各取值的正负样本分布 [累计样本个数，正例样本个数，负例样本个数] 并排序
     :param data: DataFrame 输入数据
@@ -23,7 +41,7 @@ def data_describe(data, var_name_bf, var_name_target, feature_type):
     :return: DataFrame 排好序的各组中正负样本分布 count
     """
     # 统计待离散化变量的取值类型（string or digits)
-    data_type = data[var_name_bf].apply(lambda x: type(x)).unique()
+    data_type = X[feature].apply(lambda x: type(x)).unique()
     var_type = True if str in data_type else False # 实际取值的类型：false(数字） true(字符）
     
     # 是否需要根据正例样本比重编码，True：需要，False：不需要
@@ -34,17 +52,17 @@ def data_describe(data, var_name_bf, var_name_target, feature_type):
         ratio_indicator = var_type
     elif feature_type == 1:
         ratio_indicator = 0
-        print("特征%s为离散有序数据，按照取值大小排序！" % (var_name_bf))
+        # print("特征%s为离散有序数据，按照取值大小排序！" % (feature))
     elif feature_type == 0:
-        exit(code="特征%s的类型为连续型，与其实际取值（%s）型不一致，请重新定义特征类型！！！" % (var_name_bf, data_type))
+        exit(code="特征%s的类型为连续型，与其实际取值（%s）型不一致，请重新定义特征类型！！！" % (feature, data_type))
 
     # 统计各分箱（group）内正负样本分布[累计样本个数，正例样本个数，负例样本个数]
-    count = pd.crosstab(data[var_name_bf], data[var_name_target])
+    count = pd.crosstab(X[feature], y)
     total = count.sum(axis=1)
     
     # 排序：离散变量按照pos_ratio排序，连续变量按照index排序
     if ratio_indicator:
-        count['pos_ratio'] = count[count.columns[count.columns.values>0]].sum(axis=1) * 1.0 / total#？？？
+        count['pos_ratio'] = count[count.columns[count.columns.values>0]].sum(axis=1) * 1.0 / total
         count = count.sort_values('pos_ratio') #离散变量按照pos_ratio排序
         count = count.drop(columns = ['pos_ratio'])
     else:
@@ -78,6 +96,16 @@ def calc_IV(count):
     iv = (good - bad) * woe
     return woe, iv
 
+def convert_singlevalue_to_bin(x,group,label):
+    # 针对特殊值属性进行分箱转换
+    for key,value in zip(group,label):
+        if x in key:
+            return value
+    else:
+        raise ValueError("`data` should be contained in a group.")
+
+
+
 def convert_str_to_bin(x,group):
     '''
     将离散型数据利用apply方法转换为bin编码
@@ -92,35 +120,53 @@ def convert_str_to_bin(x,group):
         raise ValueError("`data` should be contained in a group.")
 
 
-def convert_numraw_to_bin(x,groupList):
+def convert_numraw_to_bin(x,binRangeMap):
     '''
-    将数值型数据利用apply方法转换为bin编码
     :param x:
-    :param groupList:
+    :param binRangeMap:
     :return:
     '''
-    for i in range(len(groupList)):
-        if (x > groupList[i][0] and x<= groupList[i][1]):
-            return i
+    for key,value in binRangeMap.items():
+        if (len(value)>1) and (x > value[0] and x <= value[1]):
+            return key
+        elif (len(value)==1) and (x==value[0]):
+            return key
+
+    else:
+        raise ValueError("data not contained in the grouplist!!!")
+
+def convert_strraw_to_bin(x,binRangeMap):
+    for key,value in binRangeMap.items():
+        if x in value:
+            return key
     else:
         raise ValueError("data not contained in the grouplist!!!")
 
 
-def convert_bin_to_woe(x,binMap):
+def convert_raw_to_bin(x,binRangeMap,feature_type):
+    if not feature_type:#连续型
+        return convert_numraw_to_bin(x,binRangeMap)
+    else:
+        return convert_strraw_to_bin(x,binRangeMap)
+
+
+
+
+def convert_bin_to_woe(x,binWoeMap):
     '''
     将bin编码映射为woe值
     :param x:
     :param binMap:
     :return:
     '''
-    for key,value in binMap.items():
+    for key,value in binWoeMap.items():
         if x==key:
             return value
     else:
         raise ValueError("bin woe value do not match!!!")
 
 
-def bin_describe(data, var_name_bf, var_name_target, group = 1,labels=[-9999], feature_type=0):
+def bin_describe(X,y,feature,group,labels, feature_type=0):
 
 
     """
@@ -133,17 +179,22 @@ def bin_describe(data, var_name_bf, var_name_target, group = 1,labels=[-9999], f
 
     'bin_code|0|1|bin_num|badRate'
     """
-    # if len(group)!=0:
-    var_name_bf_bin = var_name_bf + "_bin"
+    featureBin = feature + "_bin"
     if not feature_type:
-        data[var_name_bf_bin] = pd.cut(data[var_name_bf],group,True,labels=labels)
+        # 单值截点
+        if len(group)==1 and len(labels)==1:
+            # 针对连续型数据的特殊分箱做处理
+            group = group.reshape((-1, 1))  # 转为二维
+            X[featureBin] = X[feature].apply(convert_singlevalue_to_bin, args=(group, labels,))
+        else:
+            X[featureBin] = pd.cut(X[feature],group,True,labels=labels)
     else:
-        data[var_name_bf_bin] = data[var_name_bf].apply(convert_str_to_bin,args=(group,))
+        X[featureBin] = X[feature].apply(convert_str_to_bin,args=(group,))
 
-    var_name_bf = var_name_bf_bin
-    count,var_type = data_describe(data, var_name_bf, var_name_target, feature_type=0)
+    count,var_type = data_describe(X, y, featureBin, feature_type=feature_type)
     count['bin_num'] = count.apply(lambda x: x.sum(),axis=1)
     count['bad_rate'] = count[1]/count['bin_num']
+    X.drop(featureBin,axis=1,inplace=True)
     return count
 
 def monotonic_detection(count):
@@ -164,26 +215,26 @@ def monotonic_detection(count):
         return -1
 
 
-def woeConsMerge(group,data, var_name_bf, var_name_target, max_interval=5, feature_type=0):
-    """
+
+
+
+def woeConsMerge(group,X,y,feature, max_interval=5, feature_type=0):
+    '''
     根据woe计算规则条件调整分箱
-    :param data:
-    :param group:
-    :param var_name_bf:
-    :param var_name_target:
+    :param group: 初始卡方分箱结果
+    :param X:
+    :param y:
+    :param feature:
+    :param max_interval:
+    :param feature_type:
     :return:
-    """
-    # group预处理
-    # if not feature_type:
-    #     group = [sorted(ele) for ele in group]
-    #     labels = range(len(group) - 1)
-    # group.sort()
+    '''
 
     # 根据feature_type修改返回的group样式(feature_type=0: 返回分割点列表；feature_type=1：返回分箱成员列表）
     if not feature_type:
         group = [ele[-1] for ele in group] if len(group[0]) == 1 else [group[0][0]] + [ele[-1] for ele in group]
-        group[0] = group[0] - 0.001 if group[0] == 0 else group[0] * (1 - 0.001)  # 包含最小值
-        group[-1] = group[-1] + 0.001 if group[-1] == 0 else group[-1] * (1 + 0.001)  # 包含最大值
+        group[0] = -float("inf") #group[0] - 0.001 if group[0] == 0 else group[0] * (1 - 0.001)  # 包含最小值
+        group[-1] = float("inf") #group[-1] + 0.001 if group[-1] == 0 else group[-1] * (1 + 0.001)  # 包含最大值
 
     LOOP_FLAG = True
 
@@ -192,7 +243,7 @@ def woeConsMerge(group,data, var_name_bf, var_name_target, max_interval=5, featu
             labels = range(len(group)-1)
         else:
             labels = range(len(group))
-        binDescribeDf = bin_describe(data,var_name_bf,var_name_target,group,labels,feature_type)
+        binDescribeDf = bin_describe(X,y,feature,group,labels,feature_type)
         # 获取不满足条件的分箱索引
         index = monotonic_detection(binDescribeDf)
         if not feature_type:
@@ -207,7 +258,7 @@ def woeConsMerge(group,data, var_name_bf, var_name_target, max_interval=5, featu
                     group.pop(index)
                     labels = range(len(group)-1)
 
-                    tempBinDescribeDf = bin_describe(data,var_name_bf,var_name_target,group,labels,feature_type)
+                    tempBinDescribeDf = bin_describe(X,y,feature,group,labels,feature_type)
                     tempIndex = monotonic_detection(tempBinDescribeDf)
                     if tempIndex == -1:
                         #返回向左合并分箱的结果
@@ -234,7 +285,7 @@ def woeConsMerge(group,data, var_name_bf, var_name_target, max_interval=5, featu
                     group[index - 1] = group[index - 1] + group[index]
                     group.remove(group[index])
                     labels = range(len(group))
-                    tempBinDescribeDf = bin_describe(data, var_name_bf, var_name_target, group, labels, feature_type)
+                    tempBinDescribeDf = bin_describe(X,y,feature, group, labels, feature_type)
                     tempIndex = monotonic_detection(tempBinDescribeDf)
                     if tempIndex == -1:
                         # 返回向左合并分箱的结果
@@ -248,14 +299,10 @@ def woeConsMerge(group,data, var_name_bf, var_name_target, max_interval=5, featu
             else:
                 LOOP_FLAG = False
 
-
-
-
-
-    if len(group)>max_interval:
-        print("warning: 分箱后，%s的箱体个数（%s）与您输入的分箱数量（%s）不符，这是由分组间的相似性太低导致的。如对分箱效果不满意，请更换其他分箱方法" % (
-            var_name_bf, len(group), max_interval))
-    print("%s分箱调整结束!!!"%var_name_bf)
+    if len(labels)>max_interval:
+        print("warning: 分箱后，%s的箱体个数（%s）与您输入的分箱数量（%s）不符" % (
+            feature, len(group), max_interval))
+    print("%s分箱调整结束!!!"%feature)
     return group,labels
 
 
@@ -263,30 +310,30 @@ def woeConsMerge(group,data, var_name_bf, var_name_target, max_interval=5, featu
 
 
 
-def woe_summary_report(df1,group,labels,data, var_name_bf, var_name_target,feature_type=0):
+def woe_summary_report(special,special_y,group,labels,X,y,feature,feature_type=0):
     '''
-Var :变量名
-bin:分箱编码
-bin_range：分箱截点
+    Var :变量名
+    bin:分箱编码
+    bin_range：分箱截点
 
-bin_num:箱内样本数
-bin_good_num:箱内负样本数
-bin_bad_num:箱内正样本数
+    bin_num:箱内样本数
+    bin_good_num:箱内负样本数
+    bin_bad_num:箱内正样本数
 
-bin_rate:箱内样本数/总样本数****
-good_bin_rate:箱内负样本数/负样本总数
-bad_bin_rate:箱内正样本数/正样本总数
+    bin_rate:箱内样本数/总样本数****
+    good_bin_rate:箱内负样本数/负样本总数
+    bad_bin_rate:箱内正样本数/正样本总数
 
-bin_rate_cum:累计sum(箱内样本数/总样本数)
-good_bin_rate_cum:累计sum(箱内负样本数/负样本总数)
-bad_bin_rate_cum:累计sum(箱内正样本数/正样本总数)
+    bin_rate_cum:累计sum(箱内样本数/总样本数)
+    good_bin_rate_cum:累计sum(箱内负样本数/负样本总数)
+    bad_bin_rate_cum:累计sum(箱内正样本数/正样本总数)
 
 
-good_rate:箱内负样本数/该箱内样本总数
-bad_rate:箱内正样本数/该箱内样本总数****
+    good_rate:箱内负样本数/该箱内样本总数
+    bad_rate:箱内正样本数/该箱内样本总数****
 
-woe:ln(bad_bin_rate/good_bin_rate)
-iv:(bad_bin_rate-good_bin_rate)*woe
+    woe:ln(bad_bin_rate/good_bin_rate)
+    iv:(bad_bin_rate-good_bin_rate)*woe
     :param group:
     :param data:
     :param var_name_bf:
@@ -299,40 +346,28 @@ iv:(bad_bin_rate-good_bin_rate)*woe
              'bin_rate_cum','good_bin_rate_cum','bad_bin_rate_cum','good_rate','bad_rate','woe','iv']
     if not feature_type:
         binGroup = [i for i in range(len(group) - 1)]
-        binGroupRange = [[group[i], group[i + 1]] for i in range(len(group) - 1)]
-        binDescribeDf = bin_describe(data, var_name_bf, var_name_target, group, labels, feature_type)
-        if df1.shape[0] != 0:
-            binGroup.append(-9999)
-            binGroupRange.append([-9999])
-            group.append(-9999)
-            # 不参与分箱属性值的统计结果
-            df1 = bin_describe(df1, var_name_bf, var_name_target)
-            # binDescribeDf = pd.concat([binDescribeDf,df1])
-            binDescribeDf = pd.concat([binDescribeDf, df1], ignore_index=True)
+        binRangeGroup = [[group[i], group[i + 1]] for i in range(len(group) - 1)]
     else:
         binGroup = [i for i in range(len(group))]
-        binGroupRange = group
-        binDescribeDf = bin_describe(data, var_name_bf, var_name_target, group, labels, feature_type)
-        if df1.shape[0] != 0:
-            binGroup.append(-9999)
-            binGroupRange.append([-9999])
-            group.append([-9999])
-            # 不参与分箱属性值的统计结果
-            df1 = bin_describe(df1, var_name_bf, var_name_target)
-            # binDescribeDf = pd.concat([binDescribeDf,df1])
-            binDescribeDf = pd.concat([binDescribeDf, df1], ignore_index=True)
-            binDescribeDf = binDescribeDf.fillna(0)
+        binRangeGroup = [i for i in group]
+    binDescribeDf = bin_describe(X, y, feature, group, labels, feature_type)
+    if special.shape[0] != 0:
+        special_labels = []
+        for item in special[feature].unique():
+            special_labels.append(len(binGroup))
+            binGroup.append(len(binGroup))#在数值分箱后放置特殊值分箱
+            binRangeGroup.append([item])
+        # 不参与分箱属性值的统计结果
+        specialDf = bin_describe(special, special_y,feature,special[feature].unique(),special_labels,feature_type=feature_type)
+        binDescribeDf = pd.concat([binDescribeDf, specialDf], ignore_index=True)
+        binDescribeDf.fillna(0,inplace=True)# specialDf因label全1或全0 crosstab不包含0或1列值
     binDescribeDf = binDescribeDf.rename(columns={0:'bin_good_num',1:'bin_bad_num'})
     goodNum = sum(binDescribeDf['bin_good_num'])
     badNum = sum(binDescribeDf['bin_bad_num'])
     totalNum = sum([goodNum,badNum])
-
     binDescribeDf['bin'] = binGroup
-    if not feature_type:
-        binDescribeDf['Var'] = [var_name_bf for i in range(len(group)-1)]
-    else:
-        binDescribeDf['Var'] = [var_name_bf for i in range(len(group))]
-    binDescribeDf['bin_range'] = binGroupRange
+    binDescribeDf['Var'] = [feature for i in range(len(binGroup))]
+    binDescribeDf['bin_range'] = binRangeGroup
     binDescribeDf['bin_rate'] = binDescribeDf['bin_num']*1.0/totalNum
     binDescribeDf['good_bin_rate'] = binDescribeDf['bin_good_num']*1.0/goodNum
     binDescribeDf['bad_bin_rate'] = binDescribeDf['bin_bad_num']*1.0/badNum
@@ -341,9 +376,27 @@ iv:(bad_bin_rate-good_bin_rate)*woe
     binDescribeDf['bad_bin_rate_cum'] = binDescribeDf['bad_bin_rate'].cumsum()
     binDescribeDf['good_rate'] = binDescribeDf['bin_good_num']/binDescribeDf['bin_num']
     binDescribeDf['woe'] = np.log(binDescribeDf['bad_bin_rate']/binDescribeDf['good_bin_rate'])
+    '''
+    添加特殊值分箱内标签特殊分布woe值替换处理
+    如果bin_good_num=0,woe为inf,用woe最大值替代
+    如果bin_bad_num=0,woe为-inf,用woe最小值替代
+    '''
+    binDescribeDf['woe'].replace([np.inf, -np.inf], np.nan,inplace=True)
+    row_index = binDescribeDf.index[np.where(np.isnan(binDescribeDf['woe']))]
+    if len(row_index)>0:
+        for idx in row_index:
+            if binDescribeDf.loc[idx,'good_bin_rate'] == 0:
+                binDescribeDf['woe'].fillna(max(binDescribeDf['woe']),inplace=True)
+            if binDescribeDf.loc[idx,'good_bin_rate'] == 1:
+                binDescribeDf['woe'].fillna(min(binDescribeDf['woe']),inplace=True)
+
     binDescribeDf['iv'] = (binDescribeDf['bad_bin_rate']-binDescribeDf['good_bin_rate'])*binDescribeDf['woe']
     binDescribeDf = binDescribeDf[order]
-    return binDescribeDf
+    binRangeMap = {key:value for key,value in zip(binGroup,binRangeGroup)}
+    binWoeMap = {key:value for key,value in zip(binGroup,list(binDescribeDf['woe']))}
+
+    featureIv = sum(binDescribeDf['iv'])
+    return binDescribeDf,binRangeMap,binWoeMap,featureIv
 
 
 

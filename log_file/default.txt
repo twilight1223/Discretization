@@ -1,0 +1,793 @@
+原始数据信息：
+         id  member_id     loan_amnt   funded_amnt  funded_amnt_inv  \
+count  0.0        0.0  31118.000000  31118.000000     31118.000000   
+mean   NaN        NaN  14557.949579  14557.949579     14553.705251   
+std    NaN        NaN   9370.971749   9370.971749      9367.089467   
+min    NaN        NaN   1000.000000   1000.000000      1000.000000   
+25%    NaN        NaN   7200.000000   7200.000000      7200.000000   
+50%    NaN        NaN  12000.000000  12000.000000     12000.000000   
+75%    NaN        NaN  20000.000000  20000.000000     20000.000000   
+max    NaN        NaN  40000.000000  40000.000000     40000.000000   
+
+        installment    annual_inc   loan_status  url  desc           dti  \
+count  31118.000000  3.111800e+04  31118.000000  0.0   0.0  31109.000000   
+mean     454.375586  8.117358e+04      0.248634  NaN   NaN     18.329057   
+std      292.617938  9.021100e+04      0.432228  NaN   NaN     13.683273   
+min       30.120000  0.000000e+00      0.000000  NaN   NaN      0.000000   
+25%      237.850000  5.000000e+04      0.000000  NaN   NaN     11.970000   
+50%      373.220000  7.000000e+04      0.000000  NaN   NaN     17.650000   
+75%      615.110000  9.800000e+04      0.000000  NaN   NaN     24.030000   
+max     1584.900000  9.522972e+06      1.000000  NaN   NaN    999.000000   
+
+        delinq_2yrs  inq_last_6mths  mths_since_last_delinq  \
+count  31118.000000    31118.000000            16186.000000   
+mean       0.329777        0.599717               34.447238   
+std        0.901410        0.884100               22.059225   
+min        0.000000        0.000000                0.000000   
+25%        0.000000        0.000000               16.000000   
+50%        0.000000        0.000000               31.000000   
+75%        0.000000        1.000000               50.000000   
+max       21.000000        5.000000              125.000000   
+
+       mths_since_last_record      open_acc       pub_rec      revol_bal  \
+count             6777.000000  31118.000000  31118.000000   31118.000000   
+mean                70.055187     11.870139      0.285044   16156.256957   
+std                 25.090648      5.762814      0.688668   21327.880178   
+min                  0.000000      1.000000      0.000000       0.000000   
+25%                 54.000000      8.000000      0.000000    5935.250000   
+50%                 73.000000     11.000000      0.000000   10993.500000   
+75%                 88.000000     15.000000      0.000000   19397.000000   
+max                119.000000     72.000000     28.000000  575181.000000   
+
+          total_acc     out_prncp  out_prncp_inv   total_pymnt  \
+count  31118.000000  31118.000000   31118.000000  31118.000000   
+mean      24.907449    781.255160     781.099942  12770.708080   
+std       12.194690   3534.932982    3534.305986  10095.396302   
+min        2.000000      0.000000       0.000000      0.000000   
+25%       16.000000      0.000000       0.000000   5113.419761   
+50%       23.000000      0.000000       0.000000  10088.286068   
+75%       32.000000      0.000000       0.000000  17473.279144   
+max      144.000000  34803.550000   34803.550000  50952.977493   
+
+       total_pymnt_inv  total_rec_prncp  total_rec_int  total_rec_late_fee  \
+count     31118.000000     31118.000000   31118.000000        31118.000000   
+mean      12766.981216     11216.815905    1385.327213            1.793544   
+std       10091.561251      9553.970956    1445.545483           11.267713   
+min           0.000000         0.000000       0.000000            0.000000   
+25%        5111.220000      3500.000000     396.000000            0.000000   
+50%       10083.980000      8800.000000     905.670000            0.000000   
+75%       17473.067500     16000.000000    1886.327500            0.000000   
+max       50952.980000     40000.000000   12695.170000          427.140000   
+
+         recoveries  collection_recovery_fee  last_pymnt_amnt  \
+count  31118.000000             31118.000000     31118.000000   
+mean     166.771430                28.821737      8323.885544   
+std      797.706282               140.647129      8750.444296   
+min        0.000000                 0.000000         0.000000   
+25%        0.000000                 0.000000       724.925000   
+50%        0.000000                 0.000000      5713.035000   
+75%        0.000000                 0.000000     12731.667500   
+max    39859.550000              7174.719000     41453.070000   
+
+       collections_12_mths_ex_med  mths_since_last_major_derog  policy_code  \
+count                31118.000000                   8799.00000      31118.0   
+mean                     0.021402                     44.78793          1.0   
+std                      0.169286                     21.65655          0.0   
+min                      0.000000                      0.00000          1.0   
+25%                      0.000000                     27.00000          1.0   
+50%                      0.000000                     45.00000          1.0   
+75%                      0.000000                     62.00000          1.0   
+max                     12.000000                    139.00000          1.0   
+
+       annual_inc_joint    dti_joint  acc_now_delinq   tot_coll_amt  \
+count      1.184000e+03  1184.000000    31118.000000   31118.000000   
+mean       1.149856e+05    18.180659        0.006588     273.731442   
+std        6.237752e+04     7.193406        0.085533    5574.776010   
+min        1.812200e+04     0.320000        0.000000       0.000000   
+25%        7.911250e+04    13.125000        0.000000       0.000000   
+50%        1.066335e+05    17.730000        0.000000       0.000000   
+75%        1.370000e+05    22.807500        0.000000       0.000000   
+max        1.210000e+06    61.900000        3.000000  932461.000000   
+
+        tot_cur_bal   open_acc_6m   open_act_il   open_il_12m   open_il_24m  \
+count  3.111800e+04  31118.000000  31118.000000  31118.000000  31118.000000   
+mean   1.531395e+05      1.047882      2.794620      0.727071      1.762260   
+std    1.643287e+05      1.209339      2.976466      0.912592      1.611265   
+min    0.000000e+00      0.000000      0.000000      0.000000      0.000000   
+25%    3.169750e+04      0.000000      1.000000      0.000000      1.000000   
+50%    9.152000e+04      1.000000      2.000000      0.000000      1.000000   
+75%    2.326415e+05      2.000000      3.000000      1.000000      3.000000   
+max    2.801964e+06     14.000000     57.000000     11.000000     22.000000   
+
+       mths_since_rcnt_il   total_bal_il       il_util   open_rv_12m  \
+count        30402.000000   31118.000000  26981.000000  31118.000000   
+mean            19.005098   36512.638184     71.153441      1.451539   
+std             23.995791   43933.798734     22.820680      1.599326   
+min              0.000000       0.000000      0.000000      0.000000   
+25%              7.000000    9864.000000     58.000000      0.000000   
+50%             12.000000   24315.000000     74.000000      1.000000   
+75%             21.000000   47300.250000     86.000000      2.000000   
+max            397.000000  780700.000000    376.000000     28.000000   
+
+        open_rv_24m     max_bal_bc      all_util  total_rev_hi_lim  \
+count  31118.000000   31118.000000  31118.000000      31118.000000   
+mean       3.051449    5729.137541     57.811588      35446.335240   
+std        2.747664    5508.509052     20.785442      33936.230033   
+min        0.000000       0.000000      0.000000          0.000000   
+25%        1.000000    2419.250000     44.000000      15600.000000   
+50%        2.000000    4443.000000     59.000000      26525.000000   
+75%        4.000000    7408.750000     72.000000      44200.000000   
+max       45.000000  301210.000000    168.000000     779000.000000   
+
+             inq_fi   total_cu_tl  inq_last_12m  acc_open_past_24mths  \
+count  31118.000000  31118.000000  31118.000000          31118.000000   
+mean       1.108844      1.663860      2.353654              5.147182   
+std        1.594778      2.878366      2.516693              3.396167   
+min        0.000000      0.000000      0.000000              0.000000   
+25%        0.000000      0.000000      1.000000              3.000000   
+50%        1.000000      0.000000      2.000000              5.000000   
+75%        2.000000      2.000000      3.000000              7.000000   
+max       25.000000     56.000000     32.000000             46.000000   
+
+         avg_cur_bal  bc_open_to_buy       bc_util  chargeoff_within_12_mths  \
+count   31118.000000    30778.000000  30755.000000              31118.000000   
+mean    14540.797706    12431.427676     54.843102                  0.009352   
+std     17020.435675    17234.397435     28.704187                  0.118409   
+min         0.000000        0.000000      0.000000                  0.000000   
+25%      3265.000000     2171.000000     31.900000                  0.000000   
+50%      8231.500000     6425.000000     55.700000                  0.000000   
+75%     20228.750000    15534.250000     79.900000                  0.000000   
+max    249580.000000   283705.000000    184.400000                  8.000000   
+
+        delinq_amnt  mo_sin_old_il_acct  mo_sin_old_rev_tl_op  \
+count  31118.000000        30402.000000          31118.000000   
+mean      15.554213          124.785310            181.049071   
+std      728.340391           52.539883             96.737892   
+min        0.000000            1.000000             10.000000   
+25%        0.000000           98.000000            118.000000   
+50%        0.000000          129.000000            163.000000   
+75%        0.000000          153.000000            231.000000   
+max    65000.000000          665.000000            781.000000   
+
+       mo_sin_rcnt_rev_tl_op  mo_sin_rcnt_tl      mort_acc  \
+count           31118.000000    31118.000000  31118.000000   
+mean               12.504820        7.311170      1.595732   
+std                15.792248        7.557103      1.857493   
+min                 0.000000        0.000000      0.000000   
+25%                 3.000000        3.000000      0.000000   
+50%                 8.000000        5.000000      1.000000   
+75%                15.000000        9.000000      3.000000   
+max               294.000000      145.000000     22.000000   
+
+       mths_since_recent_bc  mths_since_recent_bc_dlq  mths_since_recent_inq  \
+count          30788.000000               7535.000000           28322.000000   
+mean              21.624691                 38.092104               6.508686   
+std               29.617642                 22.649638               5.725271   
+min                0.000000                  0.000000               0.000000   
+25%                6.000000                 20.000000               2.000000   
+50%               12.000000                 36.000000               5.000000   
+75%               26.000000                 55.000000               9.000000   
+max              488.000000                155.000000              24.000000   
+
+       mths_since_recent_revol_delinq  num_accts_ever_120_pd  num_actv_bc_tl  \
+count                    10867.000000           31118.000000    31118.000000   
+mean                        34.805650               0.542933        3.635838   
+std                         22.343926               1.448832        2.328884   
+min                          0.000000               0.000000        0.000000   
+25%                         16.000000               0.000000        2.000000   
+50%                         31.000000               0.000000        3.000000   
+75%                         49.000000               0.000000        5.000000   
+max                        155.000000              32.000000       27.000000   
+
+       num_actv_rev_tl   num_bc_sats     num_bc_tl     num_il_tl  \
+count     31118.000000  31118.000000  31118.000000  31118.000000   
+mean          5.570827      4.876984      7.744746      8.848769   
+std           3.403377      3.156587      4.726615      7.549441   
+min           0.000000      0.000000      0.000000      0.000000   
+25%           3.000000      3.000000      4.000000      4.000000   
+50%           5.000000      4.000000      7.000000      7.000000   
+75%           7.000000      6.000000     10.000000     12.000000   
+max          41.000000     42.000000     64.000000     88.000000   
+
+       num_op_rev_tl  num_rev_accts  num_rev_tl_bal_gt_0      num_sats  \
+count   31118.000000   31118.000000         31118.000000  31118.000000   
+mean        8.384858      14.232759             5.476605     11.820458   
+std         4.824313       8.251154             3.263131      5.740329   
+min         0.000000       2.000000             0.000000      1.000000   
+25%         5.000000       8.000000             3.000000      8.000000   
+50%         7.000000      13.000000             5.000000     11.000000   
+75%        11.000000      18.000000             7.000000     15.000000   
+max        67.000000     128.000000            36.000000     72.000000   
+
+       num_tl_120dpd_2m  num_tl_30dpd  num_tl_90g_dpd_24m  num_tl_op_past_12m  \
+count      29592.000000  31118.000000        31118.000000        31118.000000   
+mean           0.001183      0.004113            0.086124            2.346680   
+std            0.034371      0.066949            0.512880            1.957547   
+min            0.000000      0.000000            0.000000            0.000000   
+25%            0.000000      0.000000            0.000000            1.000000   
+50%            0.000000      0.000000            0.000000            2.000000   
+75%            0.000000      0.000000            0.000000            3.000000   
+max            1.000000      3.000000           19.000000           28.000000   
+
+       pct_tl_nvr_dlq  percent_bc_gt_75  pub_rec_bankruptcies     tax_liens  \
+count    31118.000000      30778.000000          31118.000000  31118.000000   
+mean        94.005418         39.185447              0.169677      0.073784   
+std          8.950208         35.597408              0.420041      0.456431   
+min         18.200000          0.000000              0.000000      0.000000   
+25%         91.200000          0.000000              0.000000      0.000000   
+50%         97.600000         33.300000              0.000000      0.000000   
+75%        100.000000         66.700000              0.000000      0.000000   
+max        100.000000        100.000000              5.000000     27.000000   
+
+       tot_hi_cred_lim  total_bal_ex_mort  total_bc_limit  \
+count     3.111800e+04       31118.000000    31118.000000   
+mean      1.897811e+05       52825.399030    23801.089016   
+std       1.818890e+05       50602.927606    22911.465421   
+min       2.500000e+03           0.000000        0.000000   
+25%       5.529525e+04       22007.250000     9000.000000   
+50%       1.272515e+05       39320.000000    17200.000000   
+75%       2.788240e+05       66449.000000    30900.000000   
+max       3.101848e+06      796375.000000   354000.000000   
+
+       total_il_high_credit_limit  revol_bal_joint  sec_app_inq_last_6mths  \
+count                3.111800e+04       245.000000              245.000000   
+mean                 4.575155e+04     27509.363265                0.795918   
+std                  4.571971e+04     21511.689878                1.123147   
+min                  0.000000e+00      1317.000000                0.000000   
+25%                  1.660125e+04     12586.000000                0.000000   
+50%                  3.466500e+04     23507.000000                0.000000   
+75%                  6.125600e+04     35790.000000                1.000000   
+max                  1.120706e+06    170412.000000                6.000000   
+
+       sec_app_mort_acc  sec_app_open_acc  sec_app_revol_util  \
+count        245.000000        245.000000          242.000000   
+mean           1.710204         11.489796           58.461983   
+std            1.952746          6.347590           25.326921   
+min            0.000000          1.000000            0.000000   
+25%            0.000000          7.000000           39.775000   
+50%            1.000000         10.000000           59.500000   
+75%            3.000000         15.000000           79.950000   
+max            8.000000         43.000000          103.300000   
+
+       sec_app_open_act_il  sec_app_num_rev_accts  \
+count           245.000000             245.000000   
+mean              3.016327              13.110204   
+std               3.422404               7.496454   
+min               0.000000               1.000000   
+25%               1.000000               8.000000   
+50%               2.000000              12.000000   
+75%               4.000000              17.000000   
+max              23.000000              46.000000   
+
+       sec_app_chargeoff_within_12_mths  sec_app_collections_12_mths_ex_med  \
+count                        245.000000                          245.000000   
+mean                           0.020408                            0.069388   
+std                            0.141681                            0.270249   
+min                            0.000000                            0.000000   
+25%                            0.000000                            0.000000   
+50%                            0.000000                            0.000000   
+75%                            0.000000                            0.000000   
+max                            1.000000                            2.000000   
+
+       sec_app_mths_since_last_major_derog  deferral_term  hardship_amount  \
+count                            88.000000          228.0       228.000000   
+mean                             36.022727            3.0       199.070789   
+std                              23.134776            0.0       148.966860   
+min                               0.000000            3.0        21.050000   
+25%                              14.750000            3.0        90.785000   
+50%                              36.000000            3.0       153.555000   
+75%                              52.000000            3.0       283.347500   
+max                             105.000000            3.0       828.490000   
+
+       hardship_length  hardship_dpd  \
+count            228.0    228.000000   
+mean               3.0     13.513158   
+std                0.0      9.996687   
+min                3.0      0.000000   
+25%                3.0      0.000000   
+50%                3.0     15.500000   
+75%                3.0     22.000000   
+max                3.0     30.000000   
+
+       orig_projected_additional_accrued_interest  \
+count                                  145.000000   
+mean                                   591.444621   
+std                                    434.084165   
+min                                     75.930000   
+25%                                    281.850000   
+50%                                    455.520000   
+75%                                    838.890000   
+max                                   2307.150000   
+
+       hardship_payoff_balance_amount  hardship_last_payment_amount  \
+count                      228.000000                    228.000000   
+mean                     14291.937982                    192.400570   
+std                       8173.837267                    200.252345   
+min                       2038.840000                      0.010000   
+25%                       7624.700000                     36.325000   
+50%                      12465.160000                    140.410000   
+75%                      20547.100000                    274.560000   
+max                      36734.040000                   1187.560000   
+
+       settlement_amount  settlement_percentage  settlement_term  
+count         481.000000             481.000000       481.000000  
+mean         6613.749397              51.356445        16.954262  
+std          4548.542805               8.744170         9.561097  
+min           328.930000              30.000000         1.000000  
+25%          3211.000000              45.000000        12.000000  
+50%          5522.000000              50.000000        18.000000  
+75%          8245.000000              60.000000        18.000000  
+max         23774.000000              77.670000       181.000000  
+member_id字段单一值占比为：1.000000
+pymnt_plan字段单一值占比为：0.998682
+url字段单一值占比为：1.000000
+desc字段单一值占比为：1.000000
+out_prncp字段单一值占比为：0.935857
+out_prncp_inv字段单一值占比为：0.935857
+total_rec_late_fee字段单一值占比为：0.953275
+recoveries字段单一值占比为：0.917861
+collection_recovery_fee字段单一值占比为：0.917861
+next_pymnt_d字段单一值占比为：0.935825
+collections_12_mths_ex_med字段单一值占比为：0.980429
+policy_code字段单一值占比为：1.000000
+application_type字段单一值占比为：0.961951
+annual_inc_joint字段单一值占比为：0.961951
+dti_joint字段单一值占比为：0.961951
+verification_status_joint字段单一值占比为：0.961951
+acc_now_delinq字段单一值占比为：0.993734
+chargeoff_within_12_mths字段单一值占比为：0.991902
+delinq_amnt字段单一值占比为：0.995212
+num_tl_120dpd_2m字段单一值占比为：0.949836
+num_tl_30dpd字段单一值占比为：0.996047
+num_tl_90g_dpd_24m字段单一值占比为：0.945851
+tax_liens字段单一值占比为：0.955171
+revol_bal_joint字段单一值占比为：0.992127
+sec_app_earliest_cr_line字段单一值占比为：0.992127
+sec_app_inq_last_6mths字段单一值占比为：0.992127
+sec_app_mort_acc字段单一值占比为：0.992127
+sec_app_open_acc字段单一值占比为：0.992127
+sec_app_revol_util字段单一值占比为：0.992223
+sec_app_open_act_il字段单一值占比为：0.992127
+sec_app_num_rev_accts字段单一值占比为：0.992127
+sec_app_chargeoff_within_12_mths字段单一值占比为：0.992127
+sec_app_collections_12_mths_ex_med字段单一值占比为：0.992127
+sec_app_mths_since_last_major_derog字段单一值占比为：0.997172
+hardship_flag字段单一值占比为：0.998554
+hardship_type字段单一值占比为：0.992673
+hardship_reason字段单一值占比为：0.992673
+hardship_status字段单一值占比为：0.992673
+deferral_term字段单一值占比为：0.992673
+hardship_amount字段单一值占比为：0.992673
+hardship_start_date字段单一值占比为：0.992673
+hardship_end_date字段单一值占比为：0.992673
+payment_plan_start_date字段单一值占比为：0.992673
+hardship_length字段单一值占比为：0.992673
+hardship_dpd字段单一值占比为：0.992673
+hardship_loan_status字段单一值占比为：0.992673
+orig_projected_additional_accrued_interest字段单一值占比为：0.995340
+hardship_payoff_balance_amount字段单一值占比为：0.992673
+hardship_last_payment_amount字段单一值占比为：0.992673
+disbursement_method字段单一值占比为：0.999711
+debt_settlement_flag字段单一值占比为：0.984543
+debt_settlement_flag_date字段单一值占比为：0.984543
+settlement_status字段单一值占比为：0.984543
+settlement_date字段单一值占比为：0.984543
+settlement_amount字段单一值占比为：0.984543
+settlement_percentage字段单一值占比为：0.984543
+settlement_term字段单一值占比为：0.984543
+滤除单值占比大于90%的字段：
+ ['member_id', 'pymnt_plan', 'url', 'desc', 'out_prncp', 'out_prncp_inv', 'total_rec_late_fee', 'recoveries', 'collection_recovery_fee', 'next_pymnt_d', 'collections_12_mths_ex_med', 'policy_code', 'application_type', 'annual_inc_joint', 'dti_joint', 'verification_status_joint', 'acc_now_delinq', 'chargeoff_within_12_mths', 'delinq_amnt', 'num_tl_120dpd_2m', 'num_tl_30dpd', 'num_tl_90g_dpd_24m', 'tax_liens', 'revol_bal_joint', 'sec_app_earliest_cr_line', 'sec_app_inq_last_6mths', 'sec_app_mort_acc', 'sec_app_open_acc', 'sec_app_revol_util', 'sec_app_open_act_il', 'sec_app_num_rev_accts', 'sec_app_chargeoff_within_12_mths', 'sec_app_collections_12_mths_ex_med', 'sec_app_mths_since_last_major_derog', 'hardship_flag', 'hardship_type', 'hardship_reason', 'hardship_status', 'deferral_term', 'hardship_amount', 'hardship_start_date', 'hardship_end_date', 'payment_plan_start_date', 'hardship_length', 'hardship_dpd', 'hardship_loan_status', 'orig_projected_additional_accrued_interest', 'hardship_payoff_balance_amount', 'hardship_last_payment_amount', 'disbursement_method', 'debt_settlement_flag', 'debt_settlement_flag_date', 'settlement_status', 'settlement_date', 'settlement_amount', 'settlement_percentage', 'settlement_term']
+emp_title字段缺失值数量为2237.000000：
+emp_length字段缺失值数量为2202.000000：
+dti字段缺失值数量为9.000000：
+mths_since_last_delinq字段缺失值数量为14932.000000：
+mths_since_last_record字段缺失值数量为24341.000000：
+revol_util字段缺失值数量为14.000000：
+last_pymnt_d字段缺失值数量为110.000000：
+mths_since_last_major_derog字段缺失值数量为22319.000000：
+mths_since_rcnt_il字段缺失值数量为716.000000：
+il_util字段缺失值数量为4137.000000：
+bc_open_to_buy字段缺失值数量为340.000000：
+bc_util字段缺失值数量为363.000000：
+mo_sin_old_il_acct字段缺失值数量为716.000000：
+mths_since_recent_bc字段缺失值数量为330.000000：
+mths_since_recent_bc_dlq字段缺失值数量为23583.000000：
+mths_since_recent_inq字段缺失值数量为2796.000000：
+mths_since_recent_revol_delinq字段缺失值数量为20251.000000：
+percent_bc_gt_75字段缺失值数量为340.000000：
+进行缺失值填充的字段-值映射字典：
+ dict_items([('dti', -9999), ('mths_since_last_delinq', -9999), ('mths_since_last_record', -9999), ('revol_util', -9999), ('mths_since_last_major_derog', -9999), ('mths_since_rcnt_il', -9999), ('il_util', -9999), ('bc_open_to_buy', -9999), ('bc_util', -9999), ('mo_sin_old_il_acct', -9999), ('mths_since_recent_bc', -9999), ('mths_since_recent_bc_dlq', -9999), ('mths_since_recent_inq', -9999), ('mths_since_recent_revol_delinq', -9999), ('percent_bc_gt_75', -9999), ('emp_title', 'unknown'), ('emp_length', 'unknown'), ('last_pymnt_d', 'unknown')])
+ 1) total_rec_prncp      0.251265
+ 2) total_pymnt_inv      0.151265
+ 3) total_pymnt          0.146491
+ 4) last_pymnt_amnt      0.122065
+ 5) funded_amnt          0.073039
+ 6) loan_amnt            0.069004
+ 7) total_rec_int        0.041452
+ 8) installment          0.035213
+ 9) funded_amnt_inv      0.034358
+10) sub_grade            0.008609
+11) int_rate             0.005865
+12) last_credit_pull_d   0.004092
+13) grade                0.002770
+14) revol_bal            0.002663
+15) avg_cur_bal          0.002642
+16) title                0.002491
+17) bc_open_to_buy       0.002383
+18) last_pymnt_d         0.002033
+19) term                 0.002000
+20) num_actv_rev_tl      0.001885
+21) verification_status  0.001797
+22) annual_inc           0.001719
+23) bc_util              0.001679
+24) tot_hi_cred_lim      0.001669
+25) max_bal_bc           0.001493
+26) total_rev_hi_lim     0.001388
+27) revol_util           0.001281
+28) open_acc             0.000980
+29) total_bal_ex_mort    0.000942
+30) total_bc_limit       0.000928
+31) tot_cur_bal          0.000922
+32) mort_acc             0.000900
+33) all_util             0.000891
+34) addr_state           0.000796
+35) mo_sin_old_il_acct   0.000746
+36) zip_code             0.000741
+37) purpose              0.000710
+38) percent_bc_gt_75     0.000706
+39) dti                  0.000674
+40) mths_since_recent_inq 0.000643
+41) num_il_tl            0.000642
+42) earliest_cr_line     0.000623
+43) num_rev_tl_bal_gt_0  0.000597
+44) total_il_high_credit_limit 0.000585
+45) mo_sin_old_rev_tl_op 0.000565
+46) mths_since_rcnt_il   0.000564
+47) num_actv_bc_tl       0.000548
+48) mo_sin_rcnt_rev_tl_op 0.000521
+49) mths_since_last_delinq 0.000512
+50) emp_length           0.000494
+51) acc_open_past_24mths 0.000492
+52) emp_title            0.000490
+53) home_ownership       0.000489
+54) inq_last_12m         0.000484
+55) num_bc_sats          0.000460
+56) num_sats             0.000457
+57) total_bal_il         0.000444
+58) mths_since_recent_bc 0.000432
+59) num_op_rev_tl        0.000396
+60) total_acc            0.000381
+61) inq_fi               0.000380
+62) pct_tl_nvr_dlq       0.000379
+63) tot_coll_amt         0.000376
+64) num_rev_accts        0.000360
+65) open_act_il          0.000348
+66) open_rv_12m          0.000331
+67) mths_since_last_major_derog 0.000322
+68) mo_sin_rcnt_tl       0.000320
+69) inq_last_6mths       0.000319
+70) num_bc_tl            0.000304
+71) mths_since_recent_bc_dlq 0.000303
+72) mths_since_last_record 0.000277
+73) mths_since_recent_revol_delinq 0.000264
+74) open_rv_24m          0.000258
+75) num_tl_op_past_12m   0.000240
+76) il_util              0.000236
+77) issue_d              0.000231
+78) total_cu_tl          0.000229
+79) open_il_24m          0.000192
+80) delinq_2yrs          0.000189
+81) open_il_12m          0.000189
+82) num_accts_ever_120_pd 0.000177
+83) open_acc_6m          0.000170
+84) initial_list_status  0.000140
+85) pub_rec              0.000064
+86) pub_rec_bankruptcies 0.000036
+滤除随机森林重要性排名在前50之后的字段：
+ ['acc_open_past_24mths', 'emp_title', 'home_ownership', 'inq_last_12m', 'num_bc_sats', 'num_sats', 'total_bal_il', 'mths_since_recent_bc', 'num_op_rev_tl', 'total_acc', 'inq_fi', 'pct_tl_nvr_dlq', 'tot_coll_amt', 'num_rev_accts', 'open_act_il', 'open_rv_12m', 'mths_since_last_major_derog', 'mo_sin_rcnt_tl', 'inq_last_6mths', 'num_bc_tl', 'mths_since_recent_bc_dlq', 'mths_since_last_record', 'mths_since_recent_revol_delinq', 'open_rv_24m', 'num_tl_op_past_12m', 'il_util', 'issue_d', 'total_cu_tl', 'open_il_24m', 'delinq_2yrs', 'open_il_12m', 'num_accts_ever_120_pd', 'open_acc_6m', 'initial_list_status', 'pub_rec', 'pub_rec_bankruptcies']
+---------------------开始进行卡方分箱--------------------------
+loan_amnt分箱初始化开始：
+loan_amnt分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+loan_amnt分箱调整结束!!!
+funded_amnt分箱初始化开始：
+funded_amnt分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+funded_amnt分箱调整结束!!!
+funded_amnt_inv分箱初始化开始：
+funded_amnt_inv分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+funded_amnt_inv分箱调整结束!!!
+term分箱初始化开始：
+term分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度2等于指定分组数5
+ChiMerge分箱完成！！！
+term分箱调整结束!!!
+int_rate分箱初始化开始：
+int_rate分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+int_rate分箱调整结束!!!
+installment分箱初始化开始：
+installment分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+installment分箱调整结束!!!
+grade分箱初始化开始：
+grade分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+grade分箱调整结束!!!
+sub_grade分箱初始化开始：
+sub_grade分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+sub_grade分箱调整结束!!!
+emp_length分箱初始化开始：
+emp_length分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+emp_length分箱调整结束!!!
+annual_inc分箱初始化开始：
+annual_inc分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+annual_inc分箱调整结束!!!
+verification_status分箱初始化开始：
+verification_status分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度3等于指定分组数5
+ChiMerge分箱完成！！！
+verification_status分箱调整结束!!!
+purpose分箱初始化开始：
+purpose分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+purpose分箱调整结束!!!
+title分箱初始化开始：
+title分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+title分箱调整结束!!!
+zip_code分箱初始化开始：
+zip_code分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+zip_code分箱调整结束!!!
+addr_state分箱初始化开始：
+addr_state分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+addr_state分箱调整结束!!!
+dti分箱初始化开始：
+dti分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+dti分箱调整结束!!!
+earliest_cr_line分箱初始化开始：
+earliest_cr_line分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+earliest_cr_line分箱调整结束!!!
+mths_since_last_delinq分箱初始化开始：
+mths_since_last_delinq分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+mths_since_last_delinq分箱调整结束!!!
+open_acc分箱初始化开始：
+open_acc分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+open_acc分箱调整结束!!!
+revol_bal分箱初始化开始：
+revol_bal分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+revol_bal分箱调整结束!!!
+revol_util分箱初始化开始：
+revol_util分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+revol_util分箱调整结束!!!
+total_pymnt分箱初始化开始：
+total_pymnt分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+total_pymnt分箱调整结束!!!
+total_pymnt_inv分箱初始化开始：
+total_pymnt_inv分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+total_pymnt_inv分箱调整结束!!!
+total_rec_prncp分箱初始化开始：
+total_rec_prncp分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+total_rec_prncp分箱调整结束!!!
+total_rec_int分箱初始化开始：
+total_rec_int分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+total_rec_int分箱调整结束!!!
+last_pymnt_d分箱初始化开始：
+last_pymnt_d分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+last_pymnt_d分箱调整结束!!!
+last_pymnt_amnt分箱初始化开始：
+last_pymnt_amnt分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+last_pymnt_amnt分箱调整结束!!!
+last_credit_pull_d分箱初始化开始：
+last_credit_pull_d分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+last_credit_pull_d分箱调整结束!!!
+tot_cur_bal分箱初始化开始：
+tot_cur_bal分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+tot_cur_bal分箱调整结束!!!
+mths_since_rcnt_il分箱初始化开始：
+mths_since_rcnt_il分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+mths_since_rcnt_il分箱调整结束!!!
+max_bal_bc分箱初始化开始：
+max_bal_bc分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+max_bal_bc分箱调整结束!!!
+all_util分箱初始化开始：
+all_util分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+all_util分箱调整结束!!!
+total_rev_hi_lim分箱初始化开始：
+total_rev_hi_lim分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+total_rev_hi_lim分箱调整结束!!!
+avg_cur_bal分箱初始化开始：
+avg_cur_bal分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+avg_cur_bal分箱调整结束!!!
+bc_open_to_buy分箱初始化开始：
+bc_open_to_buy分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+bc_open_to_buy分箱调整结束!!!
+bc_util分箱初始化开始：
+bc_util分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+bc_util分箱调整结束!!!
+mo_sin_old_il_acct分箱初始化开始：
+mo_sin_old_il_acct分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+mo_sin_old_il_acct分箱调整结束!!!
+mo_sin_old_rev_tl_op分箱初始化开始：
+mo_sin_old_rev_tl_op分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+mo_sin_old_rev_tl_op分箱调整结束!!!
+mo_sin_rcnt_rev_tl_op分箱初始化开始：
+mo_sin_rcnt_rev_tl_op分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+mo_sin_rcnt_rev_tl_op分箱调整结束!!!
+mort_acc分箱初始化开始：
+mort_acc分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+mort_acc分箱调整结束!!!
+mths_since_recent_inq分箱初始化开始：
+mths_since_recent_inq分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+mths_since_recent_inq分箱调整结束!!!
+num_actv_bc_tl分箱初始化开始：
+num_actv_bc_tl分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+num_actv_bc_tl分箱调整结束!!!
+num_actv_rev_tl分箱初始化开始：
+num_actv_rev_tl分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+num_actv_rev_tl分箱调整结束!!!
+num_il_tl分箱初始化开始：
+num_il_tl分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+num_il_tl分箱调整结束!!!
+num_rev_tl_bal_gt_0分箱初始化开始：
+num_rev_tl_bal_gt_0分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+num_rev_tl_bal_gt_0分箱调整结束!!!
+percent_bc_gt_75分箱初始化开始：
+percent_bc_gt_75分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+percent_bc_gt_75分箱调整结束!!!
+tot_hi_cred_lim分箱初始化开始：
+tot_hi_cred_lim分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+tot_hi_cred_lim分箱调整结束!!!
+total_bal_ex_mort分箱初始化开始：
+total_bal_ex_mort分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+total_bal_ex_mort分箱调整结束!!!
+total_bc_limit分箱初始化开始：
+total_bc_limit分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+total_bc_limit分箱调整结束!!!
+total_il_high_credit_limit分箱初始化开始：
+total_il_high_credit_limit分箱初始化完成！！！
+ChiMerge分箱开始：
+分组长度5等于指定分组数5
+ChiMerge分箱完成！！！
+total_il_high_credit_limit分箱调整结束!!!
+---------------------卡方分箱及woe调整完成--------------------------
+数据分箱报告保存至： ./datasource/bin_woe_report.csv
+数据映射结果保存至： ./datasource/data_bin_woe.csv
+woe分箱数据保存至： ./datasource/woe_data.csv
+字段iv值结果保存至： ./datasource/data_bin_woe.csv

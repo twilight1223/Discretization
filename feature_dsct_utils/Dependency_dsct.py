@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-
-
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -202,21 +200,21 @@ def Chi2(count, max_interval=6, sig_level=0.5, inconsistency_rate_thresh = 0.05,
     return group
 
 
-def Chi_Discretization(data, var_name, var_name_target,max_interval=6, binning_method = 'chi2', feature_type = 0):
-    """
+def Chi_Discretization(X,y,feature,max_interval=6, binning_method = 'chi2', feature_type = 0):
+    '''
     基于卡方的离散化方法
-    :param data: DataFrame 原始输入数据
-    :param var_name: str 待离散化变量
-    :param var_name_target: str 标签变量（y)
-    :param max_interval: int 最大分箱数量
-    :param binning_method: string 分箱方法
-    :param feature_type: bool 待分箱变量的类型（0: 连续型变量  1：离散型变量）
-    :return: 分组信息（group）
-    """
+    :param X:
+    :param y:
+    :param feature:
+    :param max_interval:
+    :param binning_method:
+    :param feature_type: 0:连续型变量 ，1:离散型变量
+    :return:
+    '''
     # 1. 初始化：将每个值视为一个箱体 & 统计各取值的正负样本分布并排序
-    print("%s分箱初始化开始：" %var_name)
-    count, var_type = data_describe(data, var_name, var_name_target, feature_type)
-    print("%s分箱初始化完成！！！" %var_name)
+    print("%s分箱初始化开始：" %feature)
+    count, var_type = data_describe(X, y,feature, feature_type)
+    print("%s分箱初始化完成！！！" %feature)
     # 2. 卡方分箱
     if binning_method == 'chiMerge':
         # group = Chi_Merge(count,max_interval)
@@ -225,7 +223,6 @@ def Chi_Discretization(data, var_name, var_name_target,max_interval=6, binning_m
         group = Chi2(count,max_interval)
     else:
         exit(code='无法识别分箱方法')
-        
     # 后处理
     if not feature_type:
         group = [sorted(ele) for ele in group]
@@ -233,13 +230,7 @@ def Chi_Discretization(data, var_name, var_name_target,max_interval=6, binning_m
 
     if len(group) > max_interval:
         print("warning: 分箱后，%s的箱体个数（%s）与您输入的分箱数量（%s）不符，这是由分组间的相似性太低导致的。如对分箱效果不满意，请更换其他分箱方法" % (
-        var_name, len(group), max_interval))
-    #
-    # # 3. 根据var_type修改返回的group样式(var_type=0: 返回分割点列表；var_typ=1：返回分箱成员列表）
-    # if not feature_type:
-    #     group = [ele[-1] for ele in group] if len(group[0])==1 else [group[0][0]] + [ele[-1] for ele in group]
-    #     group[0] = group[0]-0.001 if group[0]==0 else group[0] * (1-0.001) # 包含最小值
-    #     group[-1] = group[-1]+0.001 if group[-1]==0 else group[-1] * (1+0.001) # 包含最大值
+        feature, len(group), max_interval))
     return group
 
 
@@ -258,8 +249,7 @@ if __name__ == '__main__':
     print(max(data['A']))
     group = Chi_Discretization(data, 'A', 'E', max_interval = 4, binning_method='chiMerge', feature_type= 0)
     # 分箱微调
-    woeSummary = woe_summary_report(group,data,'A','E',6,0)
-
-    print(group)
+    # woeSummary = woe_summary_report(group,data,'A','E',6,0)
+    # print(group)
 
 

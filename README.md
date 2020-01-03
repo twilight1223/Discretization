@@ -1,2 +1,1 @@
-# Discretization
-特征离散化方法总结
+https://blog.csdn.net/sscc_learning/article/details/78591210
