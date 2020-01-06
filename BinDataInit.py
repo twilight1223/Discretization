@@ -91,14 +91,14 @@ if __name__ == "__main__":
         featureIv = featureIv.append(pd.DataFrame({'feature': [col], 'iv': [iv]}),ignore_index=True)
     print("---------------------卡方分箱及woe调整完成--------------------------")
     result = pd.concat(objs, axis=0, ignore_index=True)
-    result.to_csv(SUMMARY_REPORT_PATH)
+    result.to_csv(SUMMARY_REPORT_PATH,index=None)
     print("数据分箱报告保存至：",SUMMARY_REPORT_PATH)
 
-    data.to_csv(DATA_BIN_WOE_PATH)
+    data.to_csv(DATA_BIN_WOE_PATH,index=None)
     print("数据映射结果保存至：", DATA_BIN_WOE_PATH)
-    woe_data.to_csv(WOE_DATA_PATH)
+    woe_data.to_csv(WOE_DATA_PATH,index=None)
     print('woe分箱数据保存至：',WOE_DATA_PATH)
-    featureIv.to_csv(FEATURE_IV_PATH)
+    featureIv.to_csv(FEATURE_IV_PATH,index=None)
     print("字段iv值结果保存至：", DATA_BIN_WOE_PATH)
 
 
