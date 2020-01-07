@@ -1,3 +1,12 @@
+import pickle
+def save_obj(obj, path ):
+    with open(path, 'wb') as f:
+        pickle.dump(obj, f, pickle.HIGHEST_PROTOCOL)
+
+def load_obj(path):
+    with open(path, 'rb') as f:
+        return pickle.load(f)
+
 def text_save(filename, data):#filename为写入CSV文件的路径，data为要写入数据列表.
     file = open(filename,'a')
     for i in range(len(data)):

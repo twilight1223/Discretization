@@ -13,22 +13,6 @@ bin_num 占比不低于5%
 import numpy as np
 import pandas as pd
 
-def iv_filter(data,woeSummarys,threshold=0.02):
-    '''
-    删除woe数据表中，iv<=0.02的字段
-    :param data:
-    :param woeSummarys:
-    :param threshold:
-    :return:
-    '''
-    delCols = []
-    for col,woeSummary in zip(data.columns,woeSummarys):
-        ivSum = sum(woeSummary['iv'])
-        if ivSum <= 0.02:
-            delCols.append(col)
-            print("%s 不符合iv>0.02的条件!!!" % col)
-    data.drop(delCols,axis=1,inplace=True)
-    return data
 
 
 def data_describe(X,y,feature,feature_type):
@@ -122,6 +106,7 @@ def convert_str_to_bin(x,group):
 
 def convert_numraw_to_bin(x,binRangeMap):
     '''
+    将原始值映射到分箱编码
     :param x:
     :param binRangeMap:
     :return:
@@ -136,6 +121,12 @@ def convert_numraw_to_bin(x,binRangeMap):
         raise ValueError("data not contained in the grouplist!!!")
 
 def convert_strraw_to_bin(x,binRangeMap):
+    '''
+    将原始值映射到分箱编码
+    :param x:
+    :param binRangeMap:
+    :return:
+    '''
     for key,value in binRangeMap.items():
         if x in value:
             return key
@@ -167,8 +158,6 @@ def convert_bin_to_woe(x,binWoeMap):
 
 
 def bin_describe(X,y,feature,group,labels, feature_type=0):
-
-
     """
     分箱基础统计结果
     :param bins:

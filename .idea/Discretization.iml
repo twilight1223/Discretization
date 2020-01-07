@@ -6,6 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/code_map" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/eda_utils" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/utils" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/model_utils" isTestSource="false" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.6 (tf2_env)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
