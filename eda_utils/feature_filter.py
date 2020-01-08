@@ -14,7 +14,6 @@ def iv_coef_filter(iv_dict,woe_data,threshold=0.7):
     :return:woe_data里需要保存的数据列
     '''
     high_IV = {k: v for k, v in iv_dict.items() if v >= 0.02}
-
     remainCols = list(high_IV.keys()) #原始
     remainRecord = remainCols.copy()
     woeDataCols = [col + '_woe' for col in remainCols]
@@ -53,7 +52,7 @@ def iv_coef_filter(iv_dict,woe_data,threshold=0.7):
 
 
 
-def vif(woe_data, threshold=10.0):
+def vif(woe_data, targetName,threshold=10.0):
     '''
     进行vif相关性分析，返回满足条件的woe编码列
     :param woe_data:
@@ -61,9 +60,8 @@ def vif(woe_data, threshold=10.0):
     :param threshold:
     :return:
     '''
-    target = woe_data['loan_status']
-
-    woe_data.drop(['loan_status'],axis=1,inplace=True)
+    target = woe_data[targetName]
+    woe_data.drop([targetName],axis=1,inplace=True)
     delCols = []
     cols = list(range(woe_data.shape[1]))
     dropped = True

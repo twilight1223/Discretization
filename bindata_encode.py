@@ -7,27 +7,19 @@ from utils.os_util import Logger
 from utils.write_data import *
 from eda_utils.eda_tools import *
 from feature_dsct_utils.Dependency_dsct import *
+from utils.config_file import *
 
 if __name__=='__main__':
     path = os.path.abspath(os.path.dirname(__file__))
     type = sys.getfilesystemencoding()
     # 记录训练过程print信息
-    sys.stdout = Logger('./log_file/default.txt')
-    # 配置保存文件路径
-    SUMMARY_REPORT_PATH = './datasource/bin_woe_report.csv'#保存分箱报告
-    DATA_BIN_WOE_PATH = './datasource/data_bin_woe.csv'#保存bin_woe编码数据
-    FEATURE_IV_PATH = './datasource/feature_iv.csv'#保存feature_iv
-    WOE_DATA_PATH = './datasource/train_woe_data.csv'#单独保存woe数据
-
+    sys.stdout = Logger(BIN_ENCODE_LOG_FILE)
     #导入数据
-    data = pd.read_csv('./datasource/credit_samples.csv')
+    data = pd.read_csv(DATA_SET)
     #划分训练集、测试集
     train,test = train_test_split(data,train_size=0.7,random_state=1234)
-    test.to_csv('./datasource/test_data.csv',index=None)
+    test.to_csv(TEST_DATA_SET,index=None)
     ## ----------------------训练集预处理----------------------------------
-    TARGET = 'loan_status'
-    CUSTOMIZE_NUM_VALUE = -9999  # 自定义缺失值填充
-    CUSTOMIZE_STR_VALUE = 'unknown'
     '''
     1.字段EDA
     去除id列
@@ -38,24 +30,16 @@ if __name__=='__main__':
     采用随机森林进行变量筛选，挑出排前50的字段
     '''
     print("原始数据信息：\n", train.describe())
-    # 去除id列，对剩余列进行EDA
+    # 去除不参与分析的特征列，对剩余列进行EDA
     target = train[TARGET]
-
-    train.drop(columns=['id', TARGET], axis=1, inplace=True)
-    # 去除时间列
-    dtCols = ['issue_d','earliest_cr_line','last_pymnt_d','next_pymnt_d','last_credit_pull_d']
-    train.drop(columns=dtCols,axis=1,inplace=True)
+    train.drop(columns=DEL_COLUMNS, axis=1, inplace=True)
     # 过滤掉单值占比大于90%的字段
     train, delCols = feature_ratio_filter(train)
     print("滤除单值占比大于90%的字段：\n", delCols)
+    #数据转换
+    if DATA_TRANSFER:
+        perform_data_transfer(train,DATA_TRANSFER)
 
-    # 数据转换
-    # 需要转换的数据列 'int_rate','emp_length','revol_util'
-    inputCols = ['int_rate','revol_util']
-    train = change_percent_to_num(train, inputCols)
-    empLengthDict = {'< 1 year': 0, '1 year': 1, '2 years': 2, '3 years': 3, '4 years': 4, '5 years': 5, '6 years': 6,
-                     '7 years': 7, '8 years': 8, '9 years': 9, '10+ years': 10}
-    train['emp_length'] = train['emp_length'].apply(apply_map,args=(empLengthDict,))
     # 缺失值填充
     nanCols = count_nan(train)  # 缺失值统计
     fillnaMap = {}
@@ -79,13 +63,11 @@ if __name__=='__main__':
     RAW_COLS = train.columns
     woe_data = pd.DataFrame(columns=[col + '_woe' for col in RAW_COLS])
     objs = []
-    featureIv = pd.DataFrame(columns=['feature', 'iv'])
-    # testCols = ['last_pymnt_d']#['grade','loan_amnt']#'loan_amnt', 'term', 'int_rate','installment', 'grade','revol_util','bc_util'
     print("---------------------开始进行卡方分箱--------------------------")
-    # testCols = ['emp_length','loan_amnt']
     binRangeMapDict = {}
     binWoeMapDict = {}
     featureIVDict = {}
+    testCols = ['apply_credibility','latest_six_month_apply']
     for col in train.columns:
         feature_type = 1 if is_string_dtype(train[col]) else 0
         special_data, spacial_y, bin_data, bin_y = data_split(train, target, col, TARGET, cons=SPECIAL_ATTRIBUTE)
@@ -110,21 +92,18 @@ if __name__=='__main__':
         woe_data[TARGET] = train[TARGET]
         # 拼接woe报告结果
         objs.append(woeSummary)
-        # # 保存字段iv值
-        # featureIv = featureIv.append(pd.DataFrame({'feature': [col], 'iv': [iv]}), ignore_index=True)
     print("---------------------卡方分箱及woe调整完成--------------------------")
     result = pd.concat(objs, axis=0, ignore_index=True)
-    result.to_csv(SUMMARY_REPORT_PATH, index=None)
-    print("数据分箱报告保存至：", SUMMARY_REPORT_PATH)
+    result.to_csv(BIN_WOE_REPORT_PATH, index=None)
+    print("数据分箱报告保存至：", BIN_WOE_REPORT_PATH)
     train.to_csv(DATA_BIN_WOE_PATH, index=None)
     print("数据映射结果保存至：", DATA_BIN_WOE_PATH)
-    woe_data.to_csv(WOE_DATA_PATH, index=None)
-    print('woe分箱数据保存至：', WOE_DATA_PATH)
-    featureIv.to_csv(FEATURE_IV_PATH, index=None)
-    print("字段iv值结果保存至：", FEATURE_IV_PATH)
-    save_obj(binRangeMapDict, './datasource/obj/binRange.pkl')
-    save_obj(binWoeMapDict, './datasource/obj/binWoe.pkl')
-    save_obj(featureIVDict,'./datasource/obj/featureIV.pkl')
+    woe_data.to_csv(TRAIN_WOE_DATA_PATH, index=None)
+    print('woe分箱数据保存至：', TRAIN_WOE_DATA_PATH)
+
+    save_obj(binRangeMapDict, BIN_RANGE)
+    save_obj(binWoeMapDict, BIN_WOE)
+    save_obj(featureIVDict,FEATURE_IV)
 
 
 

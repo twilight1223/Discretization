@@ -16,7 +16,7 @@ def compute_score(coe, woe, factor):
 
 def convert_woe_to_score(x,woeScoreMap):
     for key,value in woeScoreMap.items():
-        if x == key:
+        if round(x,8) == round(key,8):
             return value
     else:
         raise ValueError("data not contained in the woescoremap!!!")

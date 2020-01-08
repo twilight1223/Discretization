@@ -1,6 +1,7 @@
 from utils.write_data import *
+from utils.config_file import *
 
-binRangeMap = load_obj('./datasource/obj/binRange.pkl')
-binWoeMap = load_obj('./datasource/obj/binWoe.pkl')
-featureIV = load_obj('./datasource/obj/featureIV.pkl')
+binRangeMap = load_obj(BIN_RANGE)
+binWoeMap = load_obj(BIN_WOE)
+featureIV = load_obj(FEATURE_IV)
 print('test....')

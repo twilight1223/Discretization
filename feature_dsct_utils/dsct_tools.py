@@ -186,10 +186,13 @@ def bin_describe(X,y,feature,group,labels, feature_type=0):
     X.drop(featureBin,axis=1,inplace=True)
     return count
 
-def monotonic_detection(count):
+def monotonic_detection(count,temp=True):
     bins = count.shape[0]
     badRate = count['bad_rate'].tolist()
     binRate = (count['bin_num']/sum(count['bin_num'])).tolist()
+    if not temp:
+        if bins == 2:
+            return -1
     for i in range(bins):
         if i==0 or i==bins-1:
             if badRate[i] == 0.0 or badRate[i]==1.0 or binRate[i]<0.05:
@@ -234,7 +237,7 @@ def woeConsMerge(group,X,y,feature, max_interval=5, feature_type=0):
             labels = range(len(group))
         binDescribeDf = bin_describe(X,y,feature,group,labels,feature_type)
         # 获取不满足条件的分箱索引
-        index = monotonic_detection(binDescribeDf)
+        index = monotonic_detection(binDescribeDf,temp=False)
         if not feature_type:
             # 连续型变量合箱操作
             if index != -1:
@@ -248,7 +251,7 @@ def woeConsMerge(group,X,y,feature, max_interval=5, feature_type=0):
                     labels = range(len(group)-1)
 
                     tempBinDescribeDf = bin_describe(X,y,feature,group,labels,feature_type)
-                    tempIndex = monotonic_detection(tempBinDescribeDf)
+                    tempIndex = monotonic_detection(tempBinDescribeDf,temp=True)
                     if tempIndex == -1:
                         #返回向左合并分箱的结果
                         group = group

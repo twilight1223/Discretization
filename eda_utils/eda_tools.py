@@ -146,6 +146,18 @@ def apply_map(x,map_dict):
         if x==key:
             return value
 
+def perform_data_transfer(data,transfer_map):
+    for key,value in transfer_map.items():
+        if key == 'change_percent_to_num':
+            change_percent_to_num(data,value)
+        if key == 'apply_map':
+            for itemKey,itemValue in value.items():
+                data[itemKey] = data[itemKey].apply(apply_map, args=(itemValue,))
+
+
+
+
+
 
 
 
