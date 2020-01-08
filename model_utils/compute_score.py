@@ -56,7 +56,7 @@ def credit_card(coefficients,intercept,feature,bin_woe_report,A,B):
     minScore = score_0 + sum(groupedMin)
     print("分值范围：[%d-%d]" %(minScore,maxScore))
 
-    df_score_0 = pd.DataFrame(['init_score', '—', '—', '%.f' % score_0],
+    df_score_0 = pd.DataFrame(['init_score','' ,'', '%.f' % score_0],
                               index=['Var', 'bin_range', 'woe', 'score_woe']).T
     score_card = df_score_0.append(score_X, ignore_index=True)  # 总评分卡
     score_card['score_woe'] = score_card['score_woe'].astype('float64')

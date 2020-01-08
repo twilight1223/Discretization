@@ -2,21 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1a516d9c-3402-43e0-b063-bafb4789b9f4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/datasource/data_due.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/feature_dsct_utils/Basic_dsct.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/config_file.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/woe_col_filter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bindata_encode.py" beforeDir="false" afterPath="$PROJECT_DIR$/bindata_encode.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/credit_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/credit_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eda_utils/eda_tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/eda_utils/eda_tools.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eda_utils/feature_filter.py" beforeDir="false" afterPath="$PROJECT_DIR$/eda_utils/feature_filter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/feature_dsct_utils/credit.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/feature_dsct_utils/dsct_tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/feature_dsct_utils/dsct_tools.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/feature_dsct_utils/functions.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model_predict.py" beforeDir="false" afterPath="$PROJECT_DIR$/model_predict.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model_utils/compute_score.py" beforeDir="false" afterPath="$PROJECT_DIR$/model_utils/compute_score.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -214,7 +201,7 @@
       <workItem from="1578030980111" duration="14409000" />
       <workItem from="1578046487813" duration="232000" />
       <workItem from="1578273903130" duration="70069000" />
-      <workItem from="1578448448639" duration="21978000" />
+      <workItem from="1578448448639" duration="22263000" />
     </task>
     <task id="LOCAL-00001" summary="更新">
       <created>1577787280057</created>
@@ -251,7 +238,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578396505570</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="更新">
+      <created>1578474683220</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1578474683220</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -270,10 +264,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="413" y="110" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1578454471549" />
-    <state x="283" y="0" key="CommitChangelistDialog2" timestamp="1578396499664">
+    <state x="283" y="0" key="CommitChangelistDialog2" timestamp="1578474680547">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="283" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1578396499664" />
+    <state x="283" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1578474680547" />
     <state width="916" height="438" key="DebuggerActiveHint" timestamp="1578020312705">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -282,22 +276,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="0" y="237" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1578027143028" />
-    <state width="1323" height="135" key="GridCell.Tab.0.bottom" timestamp="1578474366349">
+    <state width="1323" height="130" key="GridCell.Tab.0.bottom" timestamp="1578474948045">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="135" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1578474366349" />
-    <state width="1323" height="135" key="GridCell.Tab.0.center" timestamp="1578474366349">
+    <state width="1323" height="130" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1578474948045" />
+    <state width="1323" height="130" key="GridCell.Tab.0.center" timestamp="1578474948045">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="135" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1578474366349" />
-    <state width="1323" height="135" key="GridCell.Tab.0.left" timestamp="1578474366349">
+    <state width="1323" height="130" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1578474948045" />
+    <state width="1323" height="130" key="GridCell.Tab.0.left" timestamp="1578474948045">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="135" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1578474366349" />
-    <state width="1323" height="135" key="GridCell.Tab.0.right" timestamp="1578474366349">
+    <state width="1323" height="130" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1578474948045" />
+    <state width="1323" height="130" key="GridCell.Tab.0.right" timestamp="1578474948045">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="135" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1578474366349" />
+    <state width="1323" height="130" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1578474948045" />
     <state width="1323" height="77" key="GridCell.Tab.1.bottom" timestamp="1578473235929">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -318,10 +312,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="0" y="11" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1578041722790" />
-    <state x="275" y="96" key="Vcs.Push.Dialog.v2" timestamp="1578046586600">
+    <state x="275" y="96" key="Vcs.Push.Dialog.v2" timestamp="1578474702504">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="96" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1578046586600" />
+    <state x="275" y="96" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1578474702504" />
     <state width="683" height="392" key="XDebugger.FullValuePopup" timestamp="1578467891790">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -330,10 +324,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="363" y="187" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1578448504756" />
-    <state x="370" y="154" key="git4idea.merge.GitPullDialog" timestamp="1578046577079">
+    <state x="370" y="154" key="git4idea.merge.GitPullDialog" timestamp="1578474691766">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="370" y="154" key="git4idea.merge.GitPullDialog/0.0.1366.728@0.0.1366.728" timestamp="1578046577079" />
+    <state x="370" y="154" key="git4idea.merge.GitPullDialog/0.0.1366.728@0.0.1366.728" timestamp="1578474691766" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1578451729315">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -419,7 +413,7 @@
     <SUITE FILE_PATH="coverage/Discretization$Dependency_dsct.coverage" NAME="Dependency_dsct Coverage Results" MODIFIED="1577670374177" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/特征离散化" />
     <SUITE FILE_PATH="coverage/Discretization$test.coverage" NAME="test Coverage Results" MODIFIED="1578456240615" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Discretization$bindata_encode.coverage" NAME="bindata_encode Coverage Results" MODIFIED="1578462080197" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Discretization$credit_model__1_.coverage" NAME="credit_model (1) Coverage Results" MODIFIED="1578474366337" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Discretization$credit_model__1_.coverage" NAME="credit_model (1) Coverage Results" MODIFIED="1578474948034" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Discretization$Eda_tools.coverage" NAME="Eda_tools Coverage Results" MODIFIED="1578024538826" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/eda_utils" />
     <SUITE FILE_PATH="coverage/Discretization$Dependency_dsct__1_.coverage" NAME="Dependency_dsct (1) Coverage Results" MODIFIED="1577671409065" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/FeatureDsct" />
     <SUITE FILE_PATH="coverage/Discretization$eda_tools.coverage" NAME="eda_tools Coverage Results" MODIFIED="1578377010694" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/eda_utils" />
