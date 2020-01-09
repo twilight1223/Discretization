@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 from pandas.api.types import is_string_dtype,is_numeric_dtype,is_datetime64_dtype
 import datetime
+from utils.config_file import *
 
 
 
@@ -153,6 +154,17 @@ def perform_data_transfer(data,transfer_map):
         if key == 'apply_map':
             for itemKey,itemValue in value.items():
                 data[itemKey] = data[itemKey].apply(apply_map, args=(itemValue,))
+def perform_data_fillna(data):
+    nanCols = count_nan(data)  # 缺失值统计
+    fillnaMap = {}
+    numColWithNan, strColWithNan = num_str_split(data, nanCols)
+    for col in numColWithNan:
+        fillnaMap[col] = CUSTOMIZE_NUM_VALUE
+    for col in strColWithNan:
+        fillnaMap[col] = CUSTOMIZE_STR_VALUE
+    print("进行缺失值填充的字段-值映射字典：\n", fillnaMap.items())
+    data.fillna(value=fillnaMap, inplace=True)
+    return data
 
 
 

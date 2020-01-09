@@ -7,6 +7,7 @@ from utils.config_file import *
 from utils.write_data import save_obj,load_obj
 from eda_utils.feature_filter import *
 from model_utils.model_train import forward_selection
+from sklearn.linear_model import LogisticRegression
 
 if __name__=='__main__':
     path = os.path.abspath(os.path.dirname(__file__))

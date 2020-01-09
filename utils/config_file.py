@@ -1,5 +1,6 @@
 
 # 配置保存文件路径
+FINAL_RESULTS_PATH = './datasource/finalresult/result.xlsx'# 保存excel结果
 BIN_WOE_REPORT_PATH = './datasource/resultdata/bin_woe_report.csv'#保存分箱报告
 DATA_BIN_WOE_PATH = './datasource/resultdata/data_bin_woe.csv'#保存bin_woe编码数据
 TRAIN_WOE_DATA_PATH = './datasource/resultdata/train_woe_data.csv'#单独保存训练woe数据
@@ -18,9 +19,8 @@ MODEL_TEST_RESULTS = './datasource/model/test_results.csv'#保存模型测试数
 MODEL_TRAIN_SCORE_RESULTS = './datasource/model/train_score_results.csv'#保存模型评分映射结果
 MODEL_TEST_SCORE_RESULTS = './datasource/model/test_score_results.csv'#保存模型评分映射结果
 SCORE_CARD = './datasource/model/score_card.csv'
-TRAIN_SCORE_BIN_RESULTS = './datasource/model/train_score_bin_results.csv'
 TEST_SCORE_BIN_RESULTS = './datasource/model/test_score_bin_results.csv'
-COEFICENTS_INTERCEPT = 'datasource/model/coefficients.csv'
+
 
 
 BIN_ENCODE_LOG_FILE = './log_file/bindata_encode.txt'
@@ -44,6 +44,9 @@ DATA_TRANSFER = {'change_percent_to_num':['int_rate','revol_util'],
                  }
 
 DATA_TRANSFER = {}
+
+BIN_WOE_COLS = ['Var', 'bin', 'bin_range', 'bin_num', 'bin_good_num', 'bin_bad_num', 'bin_rate', 'good_bin_rate', 'bad_bin_rate', \
+    'bin_rate_cum', 'good_bin_rate_cum', 'bad_bin_rate_cum', 'good_rate', 'bad_rate', 'woe', 'iv']
 ###############################################################
 
 

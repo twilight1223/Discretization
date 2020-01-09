@@ -41,15 +41,7 @@ if __name__=='__main__':
         perform_data_transfer(train,DATA_TRANSFER)
 
     # 缺失值填充
-    nanCols = count_nan(train)  # 缺失值统计
-    fillnaMap = {}
-    numColWithNan, strColWithNan = num_str_split(train, nanCols)
-    for col in numColWithNan:
-        fillnaMap[col] = CUSTOMIZE_NUM_VALUE
-    for col in strColWithNan:
-        fillnaMap[col] = CUSTOMIZE_STR_VALUE
-    print("进行缺失值填充的字段-值映射字典：\n", fillnaMap.items())
-    train.fillna(value=fillnaMap, inplace=True)
+    train = perform_data_fillna(train)
     # 采用随机森林进行变量筛选
     train, delCols = feature_rf_filter(train, target,f_length=30)
     print("滤除随机森林重要性排名在前30之后的字段：\n", delCols)

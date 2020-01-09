@@ -48,7 +48,7 @@ def iv_coef_filter(iv_dict,woe_data,threshold=0.7):
     delCols = [x+'_woe' for x in delCols]
 
     woe_data.drop(delCols,axis=1,inplace=True)
-    return woe_data#[col + '_woe' for col in remainCols]
+    return woe_data
 
 
 

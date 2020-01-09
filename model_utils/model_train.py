@@ -23,9 +23,9 @@ def forward_selection(data, target, method):
         for candidate in variate:
             formula = "{}~{}".format(target, "+".join(selected + [candidate]))  # 组合
             if method == 'AIC':
-                score = smf.glm(formula=formula, data=data).fit().aic
+                score = smf.ols(formula=formula, data=data).fit().aic
             else:
-                score = smf.glm(formula=formula, data=data).fit().bic
+                score = smf.ols(formula=formula, data=data).fit().bic
             score_with_variate.append((score, candidate))
         score_with_variate.sort(reverse=True)
         best_new_score, best_candidate = score_with_variate.pop()
@@ -40,5 +40,5 @@ def forward_selection(data, target, method):
             break
     # formula = "{}~{}".format(target, "+".join(selected))
     # print("final formula is {}".format(formula))
-    # model = smf.glm(formula=formula, data=data).fit()
+    # model = smf.logit(formula=formula, data=data).fit()
     return selected
