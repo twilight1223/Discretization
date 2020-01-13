@@ -3,8 +3,7 @@
 FINAL_RESULTS_PATH = './datasource/finalresult/result.xlsx'# 保存excel结果
 BIN_WOE_REPORT_PATH = './datasource/resultdata/bin_woe_report.csv'#保存分箱报告
 DATA_BIN_WOE_PATH = './datasource/resultdata/data_bin_woe.csv'#保存bin_woe编码数据
-TRAIN_WOE_DATA_PATH = './datasource/resultdata/train_woe_data.csv'#单独保存训练woe数据
-TEST_WOE_DATA_PATH = './datasource/resultdata/test_woe_data.csv'#单独保存测试woe数据
+WOE_DATA_PATH = './datasource/resultdata/woe_data.csv'#单独保存训练woe数据
 
 FEATURE_IV = './datasource/obj/feature_iv.pkl' #保存feature:iv映射字典
 BIN_RANGE = './datasource/obj/bin_range.pkl' #保存bin:range映射字典

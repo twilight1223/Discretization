@@ -96,7 +96,7 @@ def stepwise_selection(data,target,method):
 
 
 if __name__=="__main__":
-    data = pd.read_csv('../datasource/resultdata/train_woe_data.csv')
+    data = pd.read_csv('../datasource/resultdata/woe_data.csv')
     TARGET = 'status'
     selectedCol = stepwise_selection(data,TARGET,'AIC')
     print(selectedCol)

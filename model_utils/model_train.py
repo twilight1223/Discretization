@@ -2,10 +2,10 @@ import statsmodels.formula.api as smf
 
 
 import statsmodels.api as sm
+from statsmodels.stats.stattools import jarque_bera
 
-sm.Logit
 
-def forward_selection(data, target, method):
+def forward_selection(data, target, method,p_threshold=0.05):
     '''
     前向逐步回归
     :param data: 数据表，包含标签列
@@ -17,6 +17,13 @@ def forward_selection(data, target, method):
     variate = set(data.columns)
     variate.remove(target)
     selected = []
+    # p_value检验
+    formula = "{}~{}".format(target, "+".join(variate))
+    model = smf.logit(formula=formula, data=data).fit()
+    pvalue = model.pvalues.iloc[1:]
+    print(pvalue)
+    delColByP = set(pvalue[pvalue>=p_threshold].index)
+    variate = list(variate.difference(delColByP))
     current_score, best_new_score = float('inf'), float('inf')  # 设置分数的初始值为无穷大（因为aic/bic越小越好）
     while variate:
         score_with_variate = []

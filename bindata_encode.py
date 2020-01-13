@@ -90,8 +90,8 @@ if __name__=='__main__':
     print("数据分箱报告保存至：", BIN_WOE_REPORT_PATH)
     train.to_csv(DATA_BIN_WOE_PATH, index=None)
     print("数据映射结果保存至：", DATA_BIN_WOE_PATH)
-    woe_data.to_csv(TRAIN_WOE_DATA_PATH, index=None)
-    print('woe分箱数据保存至：', TRAIN_WOE_DATA_PATH)
+    woe_data.to_csv(WOE_DATA_PATH, index=None)
+    print('woe分箱数据保存至：', WOE_DATA_PATH)
 
     save_obj(binRangeMapDict, BIN_RANGE)
     save_obj(binWoeMapDict, BIN_WOE)

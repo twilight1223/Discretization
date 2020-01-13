@@ -95,7 +95,3 @@ def plot_Roc_Auc(preds, labels):
 
 
 
-def Prob2Score(prob, basePoint, PDO):
-    #将概率转化成分数且为正整数
-    y = np.log(prob/(1-prob))
-    return (basePoint+PDO/np.log(2)*(-y)).map(lambda x: int(x))

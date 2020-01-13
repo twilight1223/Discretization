@@ -2,17 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1a516d9c-3402-43e0-b063-bafb4789b9f4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/datasource/ms_credit_due.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bindata_encode.py" beforeDir="false" afterPath="$PROJECT_DIR$/bindata_encode.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/credit_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/credit_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eda_utils/a.py" beforeDir="false" afterPath="$PROJECT_DIR$/eda_utils/a.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eda_utils/eda_tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/eda_utils/eda_tools.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eda_utils/feature_filter.py" beforeDir="false" afterPath="$PROJECT_DIR$/eda_utils/feature_filter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model_predict.py" beforeDir="false" afterPath="$PROJECT_DIR$/model_predict.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model_utils/compute_score.py" beforeDir="false" afterPath="$PROJECT_DIR$/model_utils/compute_score.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eda_utils/feature_filter.py" beforeDir="false" afterPath="$PROJECT_DIR$/feature_filter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model_utils/model_evaluate.py" beforeDir="false" afterPath="$PROJECT_DIR$/model_utils/model_evaluate.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model_utils/model_train.py" beforeDir="false" afterPath="$PROJECT_DIR$/model_utils/model_train.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/config_file.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/config_file.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/woe_col_filter.py" beforeDir="false" afterPath="$PROJECT_DIR$/woe_col_filter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/woe_col_filter.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,22 +46,22 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/datasource" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\gitproject\gitHubProjects\Discretization\datasource" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\gitproject\gitHubProjects\Discretization" />
       <recent name="D:\gitproject\gitHubProjects\Discretization\feature_dsct_utils" />
       <recent name="D:\gitproject\gitHubProjects\Discretization\datasource" />
-      <recent name="D:\gitproject\gitHubProjects\Discretization" />
       <recent name="D:\gitproject\gitHubProjects\Discretization\FeatureDsct" />
       <recent name="D:\gitproject\gitHubProjects\Discretization\feature_dsct" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\gitproject\gitHubProjects\Discretization\datasource" />
+    </key>
   </component>
-  <component name="RunManager" selected="Python.credit_model (1)">
+  <component name="RunManager" selected="Python.eda_tools">
     <configuration name="a" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Discretization" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -76,28 +76,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/eda_utils/a.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="bindata_encode" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Discretization" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/bindata_encode.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -128,7 +106,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="model_predict" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="eda_tools" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Discretization" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/eda_utils" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/eda_utils/eda_tools.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="feature_filter" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Discretization" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -140,8 +139,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/model_predict.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/feature_filter.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -174,11 +172,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.eda_tools" />
         <item itemvalue="Python.credit_model (1)" />
-        <item itemvalue="Python.a" />
+        <item itemvalue="Python.feature_filter" />
         <item itemvalue="Python.woe_col_filter" />
-        <item itemvalue="Python.model_predict" />
-        <item itemvalue="Python.bindata_encode" />
+        <item itemvalue="Python.a" />
       </list>
     </recent_temporary>
   </component>
@@ -263,7 +261,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578475009527</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="更新">
+      <created>1578551070105</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1578551070105</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -282,74 +287,78 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="413" y="110" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1578454471549" />
-    <state x="283" y="0" key="CommitChangelistDialog2" timestamp="1578475007610">
+    <state x="283" y="0" key="CommitChangelistDialog2" timestamp="1578551066242">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="283" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1578475007610" />
-    <state width="916" height="438" key="DebuggerActiveHint" timestamp="1578020312705">
+    <state x="283" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1578551066242" />
+    <state width="1100" height="438" key="DebuggerActiveHint" timestamp="1578899681429">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="916" height="438" key="DebuggerActiveHint/0.0.1366.728@0.0.1366.728" timestamp="1578020312705" />
+    <state width="1100" height="438" key="DebuggerActiveHint/0.0.1366.728@0.0.1366.728" timestamp="1578899681429" />
     <state x="0" y="237" key="FileChooserDialogImpl" timestamp="1578538959907">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="0" y="237" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1578538959907" />
-    <state width="1345" height="57" key="GridCell.Tab.0.bottom" timestamp="1578550739160">
+    <state width="1345" height="30" key="GridCell.Tab.0.bottom" timestamp="1578911999542">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="57" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1578550739160" />
-    <state width="1345" height="57" key="GridCell.Tab.0.center" timestamp="1578550739160">
+    <state width="1345" height="30" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1578911999542" />
+    <state width="1345" height="30" key="GridCell.Tab.0.center" timestamp="1578911999542">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="57" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1578550739160" />
-    <state width="1345" height="57" key="GridCell.Tab.0.left" timestamp="1578550739160">
+    <state width="1345" height="30" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1578911999542" />
+    <state width="1345" height="30" key="GridCell.Tab.0.left" timestamp="1578911999542">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="57" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1578550739160" />
-    <state width="1345" height="57" key="GridCell.Tab.0.right" timestamp="1578550739160">
+    <state width="1345" height="30" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1578911999542" />
+    <state width="1345" height="30" key="GridCell.Tab.0.right" timestamp="1578911999542">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="57" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1578550739160" />
-    <state width="1345" height="57" key="GridCell.Tab.1.bottom" timestamp="1578550739160">
+    <state width="1345" height="30" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1578911999542" />
+    <state width="1345" height="249" key="GridCell.Tab.1.bottom" timestamp="1578912003831">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="57" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1578550739160" />
-    <state width="1345" height="57" key="GridCell.Tab.1.center" timestamp="1578550739160">
+    <state width="1345" height="249" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1578912003831" />
+    <state width="1345" height="249" key="GridCell.Tab.1.center" timestamp="1578912003831">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="57" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1578550739160" />
-    <state width="1345" height="57" key="GridCell.Tab.1.left" timestamp="1578550739160">
+    <state width="1345" height="249" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1578912003831" />
+    <state width="1345" height="249" key="GridCell.Tab.1.left" timestamp="1578912003830">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="57" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1578550739160" />
-    <state width="1345" height="57" key="GridCell.Tab.1.right" timestamp="1578550739160">
+    <state width="1345" height="249" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1578912003830" />
+    <state width="1345" height="249" key="GridCell.Tab.1.right" timestamp="1578912003831">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="57" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1578550739160" />
-    <state x="0" y="11" key="SettingsEditor" timestamp="1578542680318">
+    <state width="1345" height="249" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1578912003831" />
+    <state x="0" y="11" key="SettingsEditor" timestamp="1578884134933">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="0" y="11" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1578542680318" />
+    <state x="0" y="11" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1578884134933" />
     <state x="275" y="96" key="Vcs.Push.Dialog.v2" timestamp="1578475090403">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="275" y="96" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1578475090403" />
-    <state width="683" height="392" key="XDebugger.FullValuePopup" timestamp="1578549921259">
+    <state width="683" height="392" key="XDebugger.FullValuePopup" timestamp="1578620787846">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="683" height="392" key="XDebugger.FullValuePopup/0.0.1366.728@0.0.1366.728" timestamp="1578549921259" />
-    <state x="363" y="187" key="com.intellij.ide.util.TipDialog" timestamp="1578538885001">
+    <state width="683" height="392" key="XDebugger.FullValuePopup/0.0.1366.728@0.0.1366.728" timestamp="1578620787846" />
+    <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1578627793155">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="363" y="187" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1578538885001" />
+    <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1578627793155" />
+    <state x="363" y="187" key="com.intellij.ide.util.TipDialog" timestamp="1578880896594">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="363" y="187" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1578880896594" />
     <state x="370" y="154" key="git4idea.merge.GitPullDialog" timestamp="1578475083190">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="370" y="154" key="git4idea.merge.GitPullDialog/0.0.1366.728@0.0.1366.728" timestamp="1578475083190" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1578451729315">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1578892374408">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1578451729315" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1578892374408" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -361,12 +370,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/eda_utils/eda_tools.py</url>
-          <line>197</line>
-          <option name="timeStamp" value="252" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/eda_utils/eda_tools.py</url>
-          <line>189</line>
+          <line>266</line>
           <option name="timeStamp" value="261" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -396,12 +400,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/credit_model.py</url>
-          <line>102</line>
+          <line>108</line>
           <option name="timeStamp" value="309" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/credit_model.py</url>
-          <line>111</line>
+          <line>117</line>
           <option name="timeStamp" value="312" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -414,18 +418,52 @@
           <line>48</line>
           <option name="timeStamp" value="321" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/credit_model.py</url>
+          <line>16</line>
+          <option name="timeStamp" value="345" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/feature_filter.py</url>
+          <line>113</line>
+          <option name="timeStamp" value="346" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/credit_model.py</url>
+          <line>88</line>
+          <option name="timeStamp" value="350" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/credit_model.py</url>
+          <line>91</line>
+          <option name="timeStamp" value="351" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/eda_utils/eda_tools.py</url>
+          <line>302</line>
+          <option name="timeStamp" value="367" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/eda_utils/eda_tools.py</url>
+          <line>276</line>
+          <option name="timeStamp" value="389" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/eda_utils/eda_tools.py</url>
+          <line>295</line>
+          <option name="timeStamp" value="390" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
-        <watch expression="correlationMatrix" language="Python" />
-        <watch expression="coefMDf" language="Python" />
-        <watch expression="coefMDict" language="Python" />
-        <watch expression="WoeScoreDict" language="Python" />
-        <watch expression="scoreData" language="Python" />
+        <watch expression="delCols" language="Python" />
+        <watch expression="ar" language="Python" />
+        <watch expression="value_counts" language="Python" />
         <watch expression="data" language="Python" />
-        <watch expression="binDescribeDf" language="Python" />
-        <watch expression="scoreData" language="Python" />
+        <watch expression="a" language="Python" />
+        <watch expression="df" language="Python" />
+        <watch expression="colRep" language="Python" />
       </configuration>
     </watches-manager>
   </component>

@@ -1,13 +1,7 @@
-import numpy as np
-import pandas as pd
-from sklearn.linear_model import LogisticRegression
-import math
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import roc_auc_score
-from model_utils.model_train import *
 from model_utils.model_evaluate import *
 from model_utils.compute_score import *
-from eda_utils.feature_filter import *
+from feature_filter import *
 from utils.write_data import *
 from utils.config_file import *
 from feature_dsct_utils.Basic_dsct import *
@@ -16,39 +10,51 @@ from model_predict import credit_predict
 
 def train():
     # 读入woe数据
-    woeData = pd.read_csv(TRAIN_WOE_DATA_PATH)
-    # 读入筛选好的变量
-    selectedCols = load_obj(MODEL_FEATURE)
+    woeData = pd.read_csv(WOE_DATA_PATH)
     # 数据拆分出训练集，验证集
-    X = woeData[selectedCols]
-    y = woeData[TARGET]
-    trainData, testData, trainTarget, testTarget = train_test_split(X, y, train_size=0.8, random_state=1234)
-    # 计算变量相关系数
+    trainData, valData = train_test_split(woeData, train_size=0.8, random_state=1234)
+    # 变量筛选
+    trainData = woedata_filter(trainData)
+    selectedCols = list(trainData.columns)
+    selectedCols.remove(TARGET)
+    save_obj(selectedCols,path=MODEL_FEATURE)
+
+    # 模型训练
+    formula = "{}~{}".format(TARGET, "+".join(selectedCols))
+    print("final formula is {}".format(formula))
+    clf = smf.logit(formula=formula, data=trainData).fit()
+    print(clf.summary())
+
+    # 模型评估
+    valTarget = valData[TARGET]
+    valData.drop([TARGET],axis=1,inplace=True)
+    valPred = clf.predict(valData)
+    print("验证集auc:", roc_auc_score(valTarget, valPred))
+
+    # 保存模型
+    save_obj(clf, path=MODEL)
+
+    '''
+    计算模型入模变量统计信息
+    '''
+    trainTarget = trainData[TARGET]
+    trainData.drop([TARGET], axis=1, inplace=True)
+    # 计算变量相关系数矩阵
     correlationMatrix = np.corrcoef(trainData, rowvar=0)  # 相关性分析
     coefMDict = {}
     for index,col in enumerate(selectedCols):
         coefMDict[col] = correlationMatrix[:,index]
     coefMDf = pd.DataFrame(coefMDict,index=selectedCols)
-    # 模型训练
-    formula = "{}~{}".format(TARGET, "+".join(selectedCols))
-    print("final formula is {}".format(formula))
-    trainData[TARGET] = trainTarget
-    clf = smf.logit(formula=formula, data=trainData).fit()
-    print(clf.summary())
 
-    # 模型评估
-    testPred = clf.predict(testData)
-    print("验证集auc:", roc_auc_score(testTarget, testPred))
-
-    # 保存模型
-    save_obj(clf, path=MODEL)
-
-    # 保存相关系数及Pvalue
-    coefPvalue = {'coef': clf.params, 'pvalue': clf.pvalues}
+    # 保存相关系数/pvalue/vif
+    colsIndex = list(range(trainData.shape[1]))
+    vif = [variance_inflation_factor(trainData.iloc[:, colsIndex].values, ix)
+           for ix in range(trainData.iloc[:, colsIndex].shape[1])]
+    vif.insert(0,'')
+    coefPvalue = {'coef': clf.params, 'pvalue': clf.pvalues,'vif':vif}
     coefPvalue = pd.DataFrame(coefPvalue)
 
     # 保存训练woe数据及预测结果
-    trainData.drop([TARGET], axis=1, inplace=True)
     trainPred = clf.predict(trainData)
     trainData['pred'] = trainPred
     trainData.to_csv(MODEL_TRAIN_RESULTS, index='index')
