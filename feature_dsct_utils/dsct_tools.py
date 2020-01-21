@@ -140,6 +140,13 @@ def convert_raw_to_bin(x,binRangeMap,feature_type):
     else:
         return convert_strraw_to_bin(x,binRangeMap)
 
+def convert_score_to_bin(x,binRangeMap):
+    for key,value in binRangeMap.items():
+        if (x > value.left and x <= value.right):
+            return key
+    else:
+        raise ValueError("test score not contained in the binrange!!!")
+
 
 
 
@@ -224,8 +231,9 @@ def woeConsMerge(group,X,y,feature, max_interval=5, feature_type=0):
 
     # 根据feature_type修改返回的group样式(feature_type=0: 返回分割点列表；feature_type=1：返回分箱成员列表）
     if not feature_type:
-        group = [ele[-1] for ele in group] if len(group[0]) == 1 else [group[0][0]] + [ele[-1] for ele in group]
-        group[0] = -float("inf") #group[0] - 0.001 if group[0] == 0 else group[0] * (1 - 0.001)  # 包含最小值
+        group = [ele[-1] for ele in group]# if len(group[0]) == 1 else [group[0][0]] + [ele[-1] for ele in group]
+        group.insert(0,-float("inf"))
+        #group[0] = -float("inf") #group[0] - 0.001 if group[0] == 0 else group[0] * (1 - 0.001)  # 包含最小值
         group[-1] = float("inf") #group[-1] + 0.001 if group[-1] == 0 else group[-1] * (1 + 0.001)  # 包含最大值
 
     LOOP_FLAG = True

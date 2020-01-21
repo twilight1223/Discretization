@@ -32,13 +32,17 @@ if __name__=='__main__':
     print("原始数据信息：\n", train.describe())
     # 去除不参与分析的特征列，对剩余列进行EDA
     target = train[TARGET]
-    train.drop(columns=DEL_COLUMNS, axis=1, inplace=True)
+    train.drop([TARGET],axis=1,inplace=True)
+    if DEL_COLUMNS:
+        train.drop(columns=DEL_COLUMNS, axis=1, inplace=True)
     # 过滤掉单值占比大于90%的字段
     train, delCols = feature_ratio_filter(train)
     print("滤除单值占比大于90%的字段：\n", delCols)
     #数据转换
     if DATA_TRANSFER:
         perform_data_transfer(train,DATA_TRANSFER)
+
+    print(train.info())
 
     # 缺失值填充
     train = perform_data_fillna(train)
@@ -59,7 +63,7 @@ if __name__=='__main__':
     binRangeMapDict = {}
     binWoeMapDict = {}
     featureIVDict = {}
-    testCols = ['apply_credibility','latest_six_month_apply']
+    testCols = ['bank_unicnt']#'bank_unicnt','card_type_cnt'
     for col in train.columns:
         feature_type = 1 if is_string_dtype(train[col]) else 0
         special_data, spacial_y, bin_data, bin_y = data_split(train, target, col, TARGET, cons=SPECIAL_ATTRIBUTE)

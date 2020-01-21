@@ -95,7 +95,9 @@ def train():
     scoreReport.to_csv(SCORE_CARD, index=None)
 
     # 评分分箱
-    scoreBin = score_bin_report(scoreData, 'score', trainTarget, method='equal_frequency', bin_num=10)
+    scoreBin,scoreBinRangeMap = score_bin_report(scoreData, 'score', trainTarget, method='equal_distance', bin_num=10)
+
+    save_obj(scoreBinRangeMap,path=SCORE_BIN_RANGE)
 
     return coefPvalue,scoreReport,scoreBin,coefMDf
 
@@ -107,6 +109,8 @@ if __name__=='__main__':
     sys.stdout = Logger(MODEL_TRAIN_LOG_FILE)
     coefPvalue,scoreReport,trainScoreBin,coefMatrixDf = train()
     testScoreBin = credit_predict()
+    PSI = pd.DataFrame(data={'PSI':sum((trainScoreBin['bin_rate']-testScoreBin['bin_rate'])*np.log(trainScoreBin['bin_rate']/testScoreBin['bin_rate']))},index=[0])
+
     #保存结果
     writer = pd.ExcelWriter(FINAL_RESULTS_PATH)
     trainScoreBin.to_excel(writer, sheet_name='训练集score分箱',index=False)
@@ -114,6 +118,7 @@ if __name__=='__main__':
     scoreReport.to_excel(writer,sheet_name="变量分箱表",index=False)
     coefPvalue.to_excel(writer,sheet_name="回归系数表",index=True)
     coefMatrixDf.to_excel(writer,sheet_name="相关系数表",index=True)
+    PSI.to_excel(writer,sheet_name="PSI",index=False)
     writer.save()
     writer.close()
 

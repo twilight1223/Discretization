@@ -10,13 +10,13 @@ from model_utils.model_train import forward_selection
 
 def iv_coef_filter(iv_dict,woe_data,threshold=0.7):
     '''
-    进行iv及相关性筛选，iv>0.02,相关性阈值0.7，返回满足条件的woe编码列
+    进行iv及相关性筛选，0.3>iv>0.02,相关性阈值0.7，返回满足条件的woe编码列
     :param iv_dict: 变量的iv值数据df feature|iv
     :param woe_data: 变量woe编码数据df,包含target列
     :param threshold: 相关系数阈值
     :return:woe_data里需要保存的数据列
     '''
-    high_IV = {k: v for k, v in iv_dict.items() if v >= 0.02}
+    high_IV = {k: v for k, v in iv_dict.items() if v >= 0.02 and v<2}
     remainCols = list(high_IV.keys()) #原始
     remainRecord = remainCols.copy()
     woeDataCols = [col + '_woe' for col in remainCols]
@@ -50,8 +50,9 @@ def iv_coef_filter(iv_dict,woe_data,threshold=0.7):
                     break
     delCols = [x+'_woe' for x in delCols]
 
-    woe_data.drop(delCols,axis=1,inplace=True)
-    return woe_data
+    coefData.drop(delCols,axis=1,inplace=True)
+    coefData[TARGET] = woe_data[TARGET]
+    return coefData
 
 
 
@@ -107,7 +108,7 @@ def woedata_filter(woeData):
         candidateIV = {k: v for k, v in featureIV.items() if k in candidateRaw}
         candidateList = sorted(candidateIV.items(), key=lambda x: x[1], reverse=True)
         candidateList = [item[0] + '_woe' for item in candidateList]  # 添加"_woe"
-        while len(intersection) < 10:
+        while len(intersection) < 10 and len(candidateList)>0:
             appendCol = candidateList.pop(0)
             intersection.append(appendCol)
     selectedCols = intersection

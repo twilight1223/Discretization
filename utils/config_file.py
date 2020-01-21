@@ -10,6 +10,7 @@ BIN_RANGE = './datasource/obj/bin_range.pkl' #保存bin:range映射字典
 BIN_WOE = './datasource/obj/bin_woe.pkl' #保存bin:woe映射字典
 
 
+SCORE_BIN_RANGE = './datasource/obj/score_bin_range.pkl'
 WOE_SCORE = './datasource/model/woe_score.pkl' #保存woe:score映射字典
 MODEL = './datasource/model/lr_model.pkl'#保存逻辑回归模型
 MODEL_FEATURE = './datasource/model/model_feature.pkl' #保存模型特征字段
@@ -29,20 +30,22 @@ MODEL_PREDICT_LOG_FILE = './log_file/model_predict.txt'
 
 ###############################################################
 #数据集设置
-DATA_SET = './datasource/data_due.csv'
-TEST_DATA_SET = './datasource/test_data.csv'
-TARGET = 'status'
+DATA_SET = './datasource/ms_credit_due_dataset.csv'
+TEST_DATA_SET = './datasource/ms_credit_due_test_data.csv'
+TARGET = 'target'
 # 删除变量
-DEL_COLUMNS = ['first_transaction_time',TARGET]
-# DEL_COLUMNS = ['issue_d','earliest_cr_line','last_pymnt_d','next_pymnt_d','last_credit_pull_d']
-#数据转换
-DATA_TRANSFER = {'change_percent_to_num':['int_rate','revol_util'],
-                 'apply_map':{'emp_length':{'< 1 year': 0, '1 year': 1, '2 years': 2, '3 years': 3, '4 years': 4, '5 years': 5, '6 years': 6,
-                     '7 years': 7, '8 years': 8, '9 years': 9, '10+ years': 10}
-                              }
-                 }
+# DEL_COLUMNS = ['first_transaction_time',TARGET]
 
-DATA_TRANSFER = {}
+DEL_COLUMNS = []
+#数据转换
+# DATA_TRANSFER = {'change_percent_to_num':['int_rate','revol_util'],
+#                  'apply_map':{'emp_length':{'< 1 year': 0, '1 year': 1, '2 years': 2, '3 years': 3, '4 years': 4, '5 years': 5, '6 years': 6,
+#                      '7 years': 7, '8 years': 8, '9 years': 9, '10+ years': 10}
+#                               }
+#                  }
+DATA_TRANSFER = {}#'change_num_to_str':['card_type_cnt']
+
+
 
 BIN_WOE_COLS = ['Var', 'bin', 'bin_range', 'bin_num', 'bin_good_num', 'bin_bad_num', 'bin_rate', 'good_bin_rate', 'bad_bin_rate', \
     'bin_rate_cum', 'good_bin_rate_cum', 'bad_bin_rate_cum', 'good_rate', 'bad_rate', 'woe', 'iv']

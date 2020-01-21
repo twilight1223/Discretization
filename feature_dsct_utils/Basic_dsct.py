@@ -42,5 +42,8 @@ def score_bin_report(data,input_col,target,method,bin_num=10):
     binDescribeDf['good_bin_rate_cum'] = binDescribeDf['good_bin_rate'].cumsum()
     binDescribeDf['bad_bin_rate_cum'] = binDescribeDf['bad_bin_rate'].cumsum()
     binDescribeDf['good_rate'] = binDescribeDf['bin_good_num'] / binDescribeDf['bin_num']
+
     binDescribeDf = binDescribeDf[order].reset_index(drop=True)
-    return binDescribeDf
+
+    binRangeMap = {key: value for key, value in zip(binDescribeDf['bin'], binDescribeDf['bin_range'])}
+    return binDescribeDf,binRangeMap

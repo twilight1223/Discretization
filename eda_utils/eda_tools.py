@@ -189,6 +189,11 @@ def num_str_split(data,input_cols):
             numColNames.append(col)
     return numColNames,strColNames
 
+def change_num_to_str(data,input_cols):
+    for col in input_cols:
+        data[col] = data[col].astype(str)
+    return data
+
 
 
 
@@ -228,6 +233,8 @@ def perform_data_transfer(data,transfer_map):
     for key,value in transfer_map.items():
         if key == 'change_percent_to_num':
             change_percent_to_num(data,value)
+        if key == 'change_num_to_str':
+            change_num_to_str(data,value)
         if key == 'apply_map':
             for itemKey,itemValue in value.items():
                 data[itemKey] = data[itemKey].apply(apply_map, args=(itemValue,))
@@ -275,32 +282,55 @@ if __name__=='__main__':
     print(data.head(20))
     print(data.shape)
     print(data.info())
-    uselessCols = ['id_card', 'id','hobby','appl_sbm_tm']
-    data.drop(uselessCols,axis=1,inplace=True)
-    data,delCols = feature_ratio_filter(data)
-    print("单一值占比检测被排除的列：",delCols)
-    print("数据表size:",data.shape)
     value_type_describe(data)
-    # value_range_describe(data)
+    value_range_describe(data)
+    target = data['target']
+    data.drop(['target'],axis=1,inplace=True)
+    uselessCols = ['id_card', 'id','hobby']
+    data.drop(uselessCols, axis=1, inplace=True)
+    '''
+    衍生字段加工
+    '''
+    #1.申请人提交贷款时的年龄
+    data['birthday'].fillna('0000-00-00',inplace=True)
+    data['birthday'].replace(r'(^\d{2})\D+-(\d{1,2})-(\d{1,2})' ,r'19\1-\2-\3',regex=True,inplace=True)#匹配不规范年份缩写
+    value_counts = data['birthday'].value_counts(dropna=False)
+    # df = data[-data['birthday'].str.match(r'(^19\d{2}-.+-.+)|(^20\d{2}-.+-.+)')]
+    # value_counts = df['birthday'].value_counts()
+    # 只保留出生年份
+    data['birthday'] = data['birthday'].map(lambda x: int(str(x)[:4]) if (re.match('(^19\d{2}-.*)|(^20\d{2}-.*)', str(x))) else np.nan)
+    # 只保留申请日期年份
+    data['appl_sbm_tm'] = data['appl_sbm_tm'].map(lambda x: int(str(x)[:4]))
+    # 计算申请时年龄
+    data.loc[data['birthday'].notnull(), 'appl_sbm_age'] = data['appl_sbm_tm'] - data['birthday']
+    value_counts_0 = data['birthday'].value_counts(dropna=False)
+    # 对不满足条件的值进行替换
+    data.loc[(data['appl_sbm_age'] < 18) |( data['appl_sbm_age'] > 65),'appl_sbm_age'] = np.nan
+    data.drop(['birthday','appl_sbm_tm'],axis=1,inplace=True)
 
-    # 字段转换
-    # 'sex' 字段缺失值用'保密'替换
-    data['sex'].fillna('保密',inplace=True)
-    # 'birthday'
-    data['birthday'].fillna('0000-00-00', inplace=True)
-    data['birthday'].replace(r'(^\d{1,2}-.*)|(^0\d*-.*-.*)|(^\D.*)|(^1[0-8][0-9][0-9]-.*)|(^19[0-5][0-9]-.*)|(^200[3-9]-.*)|(^20[1-9][0-9]-.*)', '0000-00-00', regex=True, inplace=True) #匹配无效数据,及（1999年以前及2003年以后数据）
-    data['birthday'].replace(r'(^\d{2})\D.*' ,r'19\1-0-0',regex=True,inplace=True)#匹配不规范年份缩写
-    data['birthday'] = data['birthday'].str.extract(r"(^\d{4})")
-    data['birthday'] = data['birthday'].apply(lambda x: int(x))
-    data['age'] = datetime.date.today().year - data['birthday']
-    value_counts = data['age'].value_counts()
+    '''
+    数据值替换
+    '''
+    data.loc[data['sex']=='保密','sex'] = np.nan
+    data.loc[data['merriage']=='保密','merriage'] = np.nan
 
+    '''
+    查看数据：确定数据表中只保留有效值和缺失值
+    '''
+    for col in data.columns:
+        value_counts = data[col].value_counts(dropna=False)
+    # 2.添加样本信息缺失率属性
+    data['integrity'] = data.isnull().sum(axis=1)/data.shape[1]
 
+    value_counts_test = data['card_type_cnt'].value_counts(dropna=False)
+    print("test")
 
+    # data['target'] = target
+    # data.to_csv('../datasource/ms_credit_due_dataset.csv',index=None)
+    # data,delCols = feature_ratio_filter(data)
+    # print("单一值占比检测被排除的列：",delCols)
+    # print("数据表size:",data.shape)
 
-
-
-    print(data.shape)
 
 
 

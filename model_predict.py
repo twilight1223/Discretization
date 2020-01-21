@@ -12,6 +12,8 @@ def credit_predict():
     target = test[TARGET]
     test.drop(TARGET, axis=1, inplace=True)
     # 数据转换预处理
+    if DEL_COLUMNS:
+        test.drop(columns=DEL_COLUMNS, axis=1, inplace=True)
     if DATA_TRANSFER:
         perform_data_transfer(test, DATA_TRANSFER)
     # 缺失值填充处理
@@ -56,7 +58,32 @@ def credit_predict():
     scoreData.to_csv(MODEL_TEST_SCORE_RESULTS, index='index')
 
     # 分数分箱
-    scoreBin = score_bin_report(scoreData, 'score', target, method='equal_frequency', bin_num=10)
+    binRangeMapDict = load_obj(SCORE_BIN_RANGE)
+    scoreBinData = scoreData[['score',TARGET]]
+    order = ['bin', 'bin_range', 'bin_num', 'bin_good_num', 'bin_bad_num', 'bin_rate', 'good_bin_rate',
+             'bad_bin_rate', \
+             'bin_rate_cum', 'good_bin_rate_cum', 'bad_bin_rate_cum', 'good_rate', 'bad_rate']
+
+
+    scoreBinData['bin'] = scoreBinData['score'].apply(convert_score_to_bin, args=(binRangeMapDict,))
+    count = pd.crosstab(scoreBinData['bin'], target)
+    count['bin_num'] = count.apply(lambda x: x.sum(), axis=1)
+    count['bad_rate'] = count[1] / count['bin_num']
+    binDescribeDf = count.rename(columns={0: 'bin_good_num', 1: 'bin_bad_num'})
+    goodNum = sum(binDescribeDf['bin_good_num'])
+    badNum = sum(binDescribeDf['bin_bad_num'])
+    totalNum = sum([goodNum, badNum])
+    binDescribeDf['bin'] = [i for i in range(count.shape[0])]
+    binDescribeDf['bin_range'] = binDescribeDf['bin'].apply(apply_map,args=(binRangeMapDict,))
+    binDescribeDf['bin_rate'] = binDescribeDf['bin_num'] * 1.0 / totalNum
+    binDescribeDf['good_bin_rate'] = binDescribeDf['bin_good_num'] * 1.0 / goodNum
+    binDescribeDf['bad_bin_rate'] = binDescribeDf['bin_bad_num'] * 1.0 / badNum
+    binDescribeDf['bin_rate_cum'] = binDescribeDf['bin_rate'].cumsum()
+    binDescribeDf['good_bin_rate_cum'] = binDescribeDf['good_bin_rate'].cumsum()
+    binDescribeDf['bad_bin_rate_cum'] = binDescribeDf['bad_bin_rate'].cumsum()
+    binDescribeDf['good_rate'] = binDescribeDf['bin_good_num'] / binDescribeDf['bin_num']
+    scoreBin = binDescribeDf[order].reset_index(drop=True)
+    # scoreBin,_ = score_bin_report(scoreData, 'score', target, method='equal_frequency', bin_num=10)
     scoreBin.to_csv(TEST_SCORE_BIN_RESULTS, index=None)
     return scoreBin
 
